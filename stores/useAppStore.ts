@@ -1,4 +1,4 @@
-import { LineaMarcado, Medicion, Position, Producto, Tarea } from '@/types'
+import { LineaMarcado, Medicion, Position, Producto, Tarea, CampoDeportivo, GestorCampos } from '@/types'
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
@@ -10,6 +10,10 @@ interface AppState {
   isActive: boolean
   error: string | null
   isLoading: boolean
+
+  // Gestión de Campos Deportivos
+  gestorCampos: GestorCampos
+  campoActivo: CampoDeportivo | null
 
   // Marcado
   lineasMarcado: LineaMarcado[]
@@ -45,6 +49,14 @@ const initialState: AppState = {
   error: null,
   isLoading: false,
 
+  // Gestión de Campos Deportivos
+  gestorCampos: {
+    campos: [],
+    campoActivo: null,
+    campoSeleccionado: null
+  },
+  campoActivo: null,
+
   // Marcado
   lineasMarcado: [],
   lineaActual: null,
@@ -78,6 +90,14 @@ interface AppActions {
   setIsActive: (isActive: boolean) => void
   setError: (error: string | null) => void
   setIsLoading: (isLoading: boolean) => void
+
+  // Gestión de Campos Deportivos Actions
+  setGestorCampos: (gestor: GestorCampos) => void
+  setCampoActivo: (campo: CampoDeportivo | null) => void
+  agregarCampo: (campo: Omit<CampoDeportivo, 'id'>) => void
+  actualizarCampo: (id: string, datos: Partial<CampoDeportivo>) => void
+  eliminarCampo: (id: string) => void
+  limpiarCampos: () => void
 
   // Marcado Actions
   setLineasMarcado: (lineas: LineaMarcado[]) => void
@@ -141,6 +161,43 @@ export const useAppStore = create<AppStore>()(
         setIsActive: (isActive) => set({ isActive }),
         setError: (error) => set({ error }),
         setIsLoading: (isLoading) => set({ isLoading }),
+
+        // Gestión de Campos Deportivos Actions
+        setGestorCampos: (gestor) => set({ gestorCampos: gestor }),
+        setCampoActivo: (campo) => set({ campoActivo: campo }),
+        agregarCampo: (campo) => {
+          const nuevoCampo: CampoDeportivo = {
+            ...campo,
+            id: `campo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+          }
+          set((state) => ({
+            gestorCampos: {
+              ...state.gestorCampos,
+              campos: [...state.gestorCampos.campos, nuevoCampo]
+            }
+          }))
+        },
+        actualizarCampo: (id, datos) => set((state) => ({
+          gestorCampos: {
+            ...state.gestorCampos,
+            campos: state.gestorCampos.campos.map(campo =>
+              campo.id === id ? { ...campo, ...datos } : campo
+            )
+          }
+        })),
+        eliminarCampo: (id) => set((state) => ({
+          gestorCampos: {
+            ...state.gestorCampos,
+            campos: state.gestorCampos.campos.filter(campo => campo.id !== id)
+          }
+        })),
+        limpiarCampos: () => set({ 
+          gestorCampos: { 
+            campos: [], 
+            campoActivo: null, 
+            campoSeleccionado: null 
+          } 
+        }),
 
         // Marcado Actions
         setLineasMarcado: (lineas) => set({ lineasMarcado: lineas }),
@@ -260,6 +317,8 @@ export const useAppStore = create<AppStore>()(
         exportarDatos: () => {
           const state = get()
           const datos = {
+            gestorCampos: state.gestorCampos,
+            campoActivo: state.campoActivo,
             lineasMarcado: state.lineasMarcado,
             mediciones: state.mediciones,
             productos: state.productos,
@@ -278,6 +337,8 @@ export const useAppStore = create<AppStore>()(
           URL.revokeObjectURL(url)
         },
         importarDatos: (datos) => {
+          if (datos.gestorCampos) set({ gestorCampos: datos.gestorCampos })
+          if (datos.campoActivo) set({ campoActivo: datos.campoActivo })
           if (datos.lineasMarcado) set({ lineasMarcado: datos.lineasMarcado })
           if (datos.mediciones) set({ mediciones: datos.mediciones })
           if (datos.productos) set({ productos: datos.productos })
@@ -288,6 +349,8 @@ export const useAppStore = create<AppStore>()(
       {
         name: 'cancha-inteligente-storage',
         partialize: (state) => ({
+          gestorCampos: state.gestorCampos,
+          campoActivo: state.campoActivo,
           lineasMarcado: state.lineasMarcado,
           mediciones: state.mediciones,
           productos: state.productos,

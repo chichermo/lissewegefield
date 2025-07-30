@@ -4,9 +4,9 @@
   "description": "Sistema inteligente para marcado y gestión de canchas de fútbol",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev -p 4000",
     "build": "next build",
-    "start": "next start -p 8080",
+    "start": "next start -p 4000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",

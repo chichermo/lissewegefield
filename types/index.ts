@@ -204,3 +204,29 @@ export interface EventoMarcado {
   estado: 'pendiente' | 'en_progreso' | 'completado'
   responsable: string
 }
+
+// Tipos para múltiples campos deportivos
+export interface CampoDeportivo {
+  id: string
+  nombre: string
+  descripcion: string
+  tipo: 'futbol_11' | 'futbol_7' | 'futbol_5' | 'personalizada'
+  estado: 'activo' | 'inactivo' | 'mantenimiento'
+  fechaCreacion: Date
+  ultimaActualizacion: Date
+  configuracionFIFA: ConfiguracionFIFA
+  mediciones: Medicion[]
+  lineasMarcado: LineaMarcado[]
+  estadisticas: {
+    totalMediciones: number
+    totalMarcados: number
+    ultimaMedicion: Date | null
+    ultimoMarcado: Date | null
+  }
+}
+
+export interface GestorCampos {
+  campos: CampoDeportivo[]
+  campoActivo: string | null
+  campoSeleccionado: string | null
+}

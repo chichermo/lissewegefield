@@ -15,6 +15,8 @@ import GPSAvanzado from './components/GPSAvanzado'
 import PlantillasFIFA from './components/PlantillasFIFA'
 import ReportesAvanzados from './components/ReportesAvanzados'
 import GuiaVisual from './components/GuiaVisual'
+import GestorCampos from './components/GestorCampos'
+
 
 export default function Home() {
   const [seccionActiva, setSeccionActiva] = useState('inicio')
@@ -102,6 +104,8 @@ export default function Home() {
       case 'medicion':
         return <MedicionCancha />
       
+
+      
       case 'medicion-avanzada':
         return <MedicionAvanzada />
       
@@ -119,6 +123,9 @@ export default function Home() {
       
       case 'productos':
         return <GestionProductos />
+      
+      case 'campos':
+        return <GestorCampos />
       
       case 'gps-avanzado':
         return (

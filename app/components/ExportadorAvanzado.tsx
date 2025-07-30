@@ -5,15 +5,14 @@ import {
   FileText,
   FileCode,
   Image,
-  Settings,
   CheckCircle,
   AlertTriangle,
   Printer,
   Share2,
   Mail,
-  Cloud,
-  HardDrive
+  Cloud
 } from 'lucide-react'
+
 
 interface ExportadorAvanzadoProps {
   datos: any
@@ -147,19 +146,6 @@ export default function ExportadorAvanzado({ datos, onExportacionCompletada }: E
       setMensaje('Error durante la exportación')
       console.error('Error exportación:', error)
     }
-  }
-
-  // Descargar archivo
-  const descargarArchivo = (archivo: any) => {
-    const blob = new Blob([JSON.stringify(archivo)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = archivo.nombreArchivo
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
   }
 
   return (

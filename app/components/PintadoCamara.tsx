@@ -7,7 +7,7 @@ import {
   Palette,
   Download,
   RotateCcw,
-  CheckCircle,
+
   AlertTriangle,
   Play,
   Pause,
@@ -42,7 +42,7 @@ export default function PintadoCamara({ onPintadoCompletado }: PintadoCamaraProp
   const [mensaje, setMensaje] = useState('')
   
   const videoRef = useRef<HTMLVideoElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+
   const streamRef = useRef<MediaStream | null>(null)
 
   const coloresDisponibles = [

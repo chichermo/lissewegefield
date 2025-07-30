@@ -336,6 +336,8 @@ a {
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .futbol-card::before {
@@ -496,6 +498,8 @@ a {
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .futbol-stat-card::before {
@@ -552,6 +556,9 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
 }
 
 .futbol-stat-label {
@@ -559,6 +566,8 @@ a {
   font-weight: 600;
   color: var(--text-secondary);
   letter-spacing: 0.025em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Grids profesionales */
