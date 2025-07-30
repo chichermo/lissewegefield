@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home,
   MapPin,
-  Camera,
-  Paintbrush,
   Download,
   Globe,
   History,
@@ -12,7 +10,9 @@ import {
   Package,
   Menu,
   X,
-  Settings
+  Settings,
+  Target,
+  Grid3X3
 } from 'lucide-react'
 
 interface NavigationMobileProps {
@@ -39,26 +39,20 @@ export default function NavigationMobile({ onNavigate, activeSection }: Navigati
     {
       id: 'medicion',
       label: 'Medición',
-      icon: MapPin,
+      icon: Target,
       color: 'bg-purple-500'
     },
     {
-      id: 'medicion-camara',
-      label: 'Medición Cámara',
-      icon: Camera,
-      color: 'bg-orange-500'
-    },
-    {
-      id: 'pintado-camara',
-      label: 'Pintado Cámara',
-      icon: Paintbrush,
-      color: 'bg-pink-500'
+      id: 'campos',
+      label: 'Campos',
+      icon: Grid3X3,
+      color: 'bg-indigo-500'
     },
     {
       id: 'exportador',
       label: 'Exportar',
       icon: Download,
-      color: 'bg-indigo-500'
+      color: 'bg-orange-500'
     },
     {
       id: 'mapa',
