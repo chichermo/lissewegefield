@@ -41,7 +41,12 @@ import { useEffect, useState, useRef } from 'react'
 import { Medicion, PuntoGPS } from '../../types'
 import { useAppStore } from '../../stores/useAppStore'
 
-export default function MedicionCancha() {
+interface MedicionCanchaProps {
+  isRecording?: boolean
+  onRecordingChange?: (recording: boolean) => void
+}
+
+export default function MedicionCancha({ isRecording, onRecordingChange }: MedicionCanchaProps) {
   // Obtener estado global del store
   const {
     mediciones: medicionesGlobales,
@@ -83,6 +88,17 @@ export default function MedicionCancha() {
   useEffect(() => {
     setCampoSeleccionado(campoActivo?.id || null)
   }, [campoActivo])
+
+  // Sincronizar estado de grabación desde el componente padre
+  useEffect(() => {
+    if (isRecording !== undefined && isRecording !== isMeasuring) {
+      if (isRecording) {
+        iniciarMedicion()
+      } else {
+        detenerMedicion()
+      }
+    }
+  }, [isRecording])
   const [precisionGPS, setPrecisionGPS] = useState(0)
   const [señalGPS, setSeñalGPS] = useState(0)
   const [tiempoSesion, setTiempoSesion] = useState(0)
@@ -522,6 +538,11 @@ export default function MedicionCancha() {
     setPasoActual(1)
     setInstrucciones('🎯 Comienza en cualquier esquina de la cancha. Camina por el perímetro completo con precisión submétrica.')
     setMensaje('✅ Medición profesional FIFA iniciada. Sistema GPS de alta precisión activo.')
+    
+    // Notificar al componente padre sobre el cambio de estado
+    if (onRecordingChange) {
+      onRecordingChange(true)
+    }
   }
 
   const detenerMedicion = () => {
@@ -529,6 +550,11 @@ export default function MedicionCancha() {
     calcularMediciones()
     setInstrucciones('')
     setMensaje('⏹️ Medición detenida. Calculando resultados FIFA...')
+    
+    // Notificar al componente padre sobre el cambio de estado
+    if (onRecordingChange) {
+      onRecordingChange(false)
+    }
   }
 
   const calcularMediciones = () => {

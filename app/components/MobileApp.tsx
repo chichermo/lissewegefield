@@ -30,11 +30,19 @@ import { useAppStore } from '@/stores/useAppStore'
 interface MobileAppProps {
   onNavigate: (section: string) => void
   activeSection: string
+  onStartRecording?: () => void
+  onStopRecording?: () => void
+  isRecording?: boolean
 }
 
-export default function MobileApp({ onNavigate, activeSection }: MobileAppProps) {
+export default function MobileApp({ 
+  onNavigate, 
+  activeSection, 
+  onStartRecording,
+  onStopRecording,
+  isRecording = false
+}: MobileAppProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isRecording, setIsRecording] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
   const [showStatus, setShowStatus] = useState(false)
   const { gestorCampos, campoActivo } = useAppStore()
@@ -97,15 +105,19 @@ export default function MobileApp({ onNavigate, activeSection }: MobileAppProps)
   }
 
   const handleStartRecording = () => {
-    setIsRecording(true)
-    setShowStatus(true)
-    setTimeout(() => setShowStatus(false), 3000)
+    if (onStartRecording) {
+      onStartRecording()
+      setShowStatus(true)
+      setTimeout(() => setShowStatus(false), 3000)
+    }
   }
 
   const handleStopRecording = () => {
-    setIsRecording(false)
-    setShowStatus(true)
-    setTimeout(() => setShowStatus(false), 3000)
+    if (onStopRecording) {
+      onStopRecording()
+      setShowStatus(true)
+      setTimeout(() => setShowStatus(false), 3000)
+    }
   }
 
   return (
@@ -175,7 +187,7 @@ export default function MobileApp({ onNavigate, activeSection }: MobileAppProps)
           <div className="mb-6">
             <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-2xl p-4 border border-green-500/30">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-white font-semibold">Controles</h3>
+                <h3 className="text-white font-semibold">Controles de Grabación</h3>
                 <div className={`w-3 h-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`} />
               </div>
               
@@ -191,7 +203,7 @@ export default function MobileApp({ onNavigate, activeSection }: MobileAppProps)
                   whileTap={{ scale: 0.98 }}
                 >
                   {isRecording ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                  <span>{isRecording ? 'Detener' : 'Iniciar'}</span>
+                  <span>{isRecording ? 'Detener' : 'Iniciar'} {activeSection === 'medicion' ? 'Medición' : 'Marcado'}</span>
                 </motion.button>
                 
                 <motion.button
@@ -201,6 +213,20 @@ export default function MobileApp({ onNavigate, activeSection }: MobileAppProps)
                 >
                   <RotateCcw className="w-5 h-5" />
                 </motion.button>
+              </div>
+              
+              <div className="mt-3 text-xs text-white/70">
+                {isRecording ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <span>Grabando... Mueve el dispositivo para registrar puntos</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                    <span>Listo para {activeSection === 'medicion' ? 'medir' : 'marcar'}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

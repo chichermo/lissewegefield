@@ -24,6 +24,7 @@ export default function Home() {
   const [seccionActiva, setSeccionActiva] = useState('inicio')
   const [modoAvanzado, setModoAvanzado] = useState(false)
   const [plantillaSeleccionada, setPlantillaSeleccionada] = useState<any>(null)
+  const [isRecording, setIsRecording] = useState(false)
 
   // Registrar Service Worker
   useEffect(() => {
@@ -39,6 +40,16 @@ export default function Home() {
     }
   }, [])
 
+
+  const handleStartRecording = () => {
+    setIsRecording(true)
+    console.log('Iniciando grabación...')
+  }
+
+  const handleStopRecording = () => {
+    setIsRecording(false)
+    console.log('Deteniendo grabación...')
+  }
 
   const renderizarSeccion = () => {
     switch (seccionActiva) {
@@ -183,7 +194,13 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
       {/* Versión móvil */}
       <div className="lg:hidden">
-        <MobileApp onNavigate={setSeccionActiva} activeSection={seccionActiva} />
+        <MobileApp 
+          onNavigate={setSeccionActiva} 
+          activeSection={seccionActiva}
+          onStartRecording={handleStartRecording}
+          onStopRecording={handleStopRecording}
+          isRecording={isRecording}
+        />
         <div className="pt-24 pb-20 px-4">
           {renderizarSeccion()}
         </div>
