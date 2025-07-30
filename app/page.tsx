@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
 import MedicionCancha from './components/MedicionCancha'
@@ -16,6 +16,8 @@ import PlantillasFIFA from './components/PlantillasFIFA'
 import ReportesAvanzados from './components/ReportesAvanzados'
 import GuiaVisual from './components/GuiaVisual'
 import GestorCampos from './components/GestorCampos'
+import PWAInstaller from './components/PWAInstaller'
+import MobileApp from './components/MobileApp'
 
 
 export default function Home() {
@@ -23,6 +25,19 @@ export default function Home() {
   const [modoAvanzado, setModoAvanzado] = useState(false)
   const [plantillaSeleccionada, setPlantillaSeleccionada] = useState<any>(null)
 
+  // Registrar Service Worker
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then((registration) => {
+          console.log('SW registrado:', registration)
+        })
+        .catch((error) => {
+          console.log('SW error:', error)
+        })
+    }
+  }, [])
 
 
   const renderizarSeccion = () => {
@@ -166,53 +181,67 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
-      <Header onNavigate={setSeccionActiva} activeSection={seccionActiva} />
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Navegación */}
-          <div className="lg:w-64">
-            <Navigation
-              onNavigate={setSeccionActiva}
-              activeSection={seccionActiva}
-            />
-            
-            {/* Modo Avanzado */}
-            <motion.div
-              className="futbol-card mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-white font-medium">Modo Avanzado</span>
-                <motion.button
-                  onClick={() => setModoAvanzado(!modoAvanzado)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
-                    modoAvanzado ? 'bg-blue-500' : 'bg-white/20'
-                  }`}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <motion.div
-                    className="w-4 h-4 bg-white rounded-full"
-                    animate={{ x: modoAvanzado ? 24 : 2 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                </motion.button>
-              </div>
-              {modoAvanzado && (
-                <p className="text-xs text-white/70 mt-2">
-                  Funciones profesionales habilitadas
-                </p>
-              )}
-            </motion.div>
-          </div>
+      {/* Versión móvil */}
+      <div className="lg:hidden">
+        <MobileApp onNavigate={setSeccionActiva} activeSection={seccionActiva} />
+        <div className="pt-24 pb-20 px-4">
+          {renderizarSeccion()}
+        </div>
+      </div>
 
-          {/* Contenido Principal */}
-          <div className="flex-1">
-            {renderizarSeccion()}
+      {/* Versión desktop */}
+      <div className="hidden lg:block">
+        <Header onNavigate={setSeccionActiva} activeSection={seccionActiva} />
+        
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Navegación */}
+            <div className="lg:w-64">
+              <Navigation
+                onNavigate={setSeccionActiva}
+                activeSection={seccionActiva}
+              />
+              
+              {/* Modo Avanzado */}
+              <motion.div
+                className="futbol-card mt-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-white font-medium">Modo Avanzado</span>
+                  <motion.button
+                    onClick={() => setModoAvanzado(!modoAvanzado)}
+                    className={`w-12 h-6 rounded-full transition-colors ${
+                      modoAvanzado ? 'bg-blue-500' : 'bg-white/20'
+                    }`}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div
+                      className="w-4 h-4 bg-white rounded-full"
+                      animate={{ x: modoAvanzado ? 24 : 2 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  </motion.button>
+                </div>
+                {modoAvanzado && (
+                  <p className="text-xs text-white/70 mt-2">
+                    Funciones profesionales habilitadas
+                  </p>
+                )}
+              </motion.div>
+            </div>
+
+            {/* Contenido Principal */}
+            <div className="flex-1">
+              {renderizarSeccion()}
+            </div>
           </div>
         </div>
       </div>
+      
+      {/* PWA Installer */}
+      <PWAInstaller />
     </div>
   )
 }
