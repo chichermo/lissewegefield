@@ -41,8 +41,14 @@ export default function MobileApp({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
   const [showStatus, setShowStatus] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const { campoActivo } = useAppStore()
   const { t } = useLanguage()
+
+  // Verificar si estamos en el cliente
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Verificar estado de conexión
   useEffect(() => {
@@ -127,7 +133,9 @@ export default function MobileApp({
               <Smartphone className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-white font-bold text-lg">Lissewege Fields</h1>
+              <h1 className="text-white font-bold text-lg">
+                {isClient ? 'Lissewege Fields' : 'CanchaPro'}
+              </h1>
               <p className="text-white/80 text-xs">
                 {campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')}
               </p>
@@ -136,9 +144,11 @@ export default function MobileApp({
           
           <div className="flex items-center space-x-2">
             {/* Selector de idiomas */}
-            <div className="relative z-50">
-              <LanguageSelector variant="compact" position="top-right" />
-            </div>
+            {isClient && (
+              <div className="relative z-50">
+                <LanguageSelector variant="compact" position="top-right" />
+              </div>
+            )}
             
             {/* Indicador de conexión */}
             <div className={`p-2 rounded-lg ${isOnline ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
