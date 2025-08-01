@@ -6,10 +6,9 @@ import {
   MapPin,
   Grid3X3,
   History,
-  Smartphone,
+  Trophy,
   Camera,
   Gauge,
-  Trophy,
   Users
 } from 'lucide-react'
 import { useAppStore } from '../../stores/useAppStore'
@@ -82,12 +81,13 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Smartphone className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Trophy className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">CanchaPro</h1>
-          <p className="text-white/70 text-sm">
-            Sistema profesional de medición y marcado
+          <h1 className="text-2xl font-bold text-white mb-2">Lissewege Fields</h1>
+          <p className="text-blue-200 text-sm font-medium mb-1">R.F.C. Lissewege - 4718</p>
+          <p className="text-white/60 text-xs">
+            Pol Dhondtstraat 70, 8380 Lissewege, Brugge
           </p>
         </div>
       </div>

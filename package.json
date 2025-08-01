@@ -1,7 +1,7 @@
 {
-  "name": "cancha-inteligente",
+  "name": "lissewege-fields",
   "version": "1.0.0",
-  "description": "Sistema inteligente para marcado y gestión de canchas de fútbol",
+  "description": "Sistema inteligente para medición y marcado de campos del R.F.C. Lissewege",
   "main": "index.js",
   "scripts": {
     "dev": "next dev -p 3000",

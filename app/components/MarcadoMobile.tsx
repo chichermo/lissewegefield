@@ -14,10 +14,12 @@ import {
   WifiOff,
   LineChart,
   Square,
-  Circle
+  Circle,
+  Gauge
 } from 'lucide-react'
 import { useAppStore } from '../../stores/useAppStore'
 import { PuntoGPS, LineaMarcado } from '../../types'
+import CameraTools from './CameraTools'
 
 interface MarcadoMobileProps {
   isRecording?: boolean
@@ -48,6 +50,11 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
   const [error, setError] = useState<string | null>(null)
   const [showFieldSelector, setShowFieldSelector] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
+  
+  // Estados de herramientas de cámara
+  const [activeTools, setActiveTools] = useState<string[]>([])
+  const [walkingPath, setWalkingPath] = useState<Array<{ x: number; y: number; timestamp: number }>>([])
+  const [totalDistance, setTotalDistance] = useState(0)
 
 
   // Referencias
@@ -104,6 +111,34 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
   const vibrar = (duracion: number | number[] = 100) => {
     if ('vibrate' in navigator) {
       navigator.vibrate(duracion)
+    }
+  }
+
+  // Funciones para herramientas de cámara
+  const toggleCameraTool = (tool: string) => {
+    setActiveTools(prev => 
+      prev.includes(tool) 
+        ? prev.filter(t => t !== tool)
+        : [...prev, tool]
+    )
+    vibrar(50)
+  }
+
+  const updateWalkingPath = (x: number, y: number) => {
+    const newPoint = { x, y, timestamp: Date.now() }
+    setWalkingPath(prev => [...prev, newPoint])
+    
+    // Calcular distancia total si hay puntos anteriores
+    if (walkingPath.length > 0) {
+      const lastPoint = walkingPath[walkingPath.length - 1]
+      if (lastPoint) {
+        const distance = Math.sqrt(
+          Math.pow(x - lastPoint.x, 2) + Math.pow(y - lastPoint.y, 2)
+        )
+        // Convertir píxeles a metros (aproximación)
+        const meterDistance = distance * 0.001 // Ajustar factor según calibración
+        setTotalDistance(prev => prev + meterDistance)
+      }
     }
   }
 
@@ -319,15 +354,20 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
-    // Simular punto GPS basado en posición de pantalla
+    // Actualizar camino de caminata para herramientas
+    updateWalkingPath(x, y)
+
+    // Simular punto GPS basado en posición de pantalla (coordenadas de Lissewege)
     const puntoSimulado: PuntoGPS = {
-      lat: currentPosition?.lat || 0 + (x / 1000),
-      lng: currentPosition?.lng || 0 + (y / 1000),
+      lat: (currentPosition?.lat || 51.2993) + (y / 100000), // Lissewege, Brugge
+      lng: (currentPosition?.lng || 3.2218) + (x / 100000),
+      accuracy: 3,
       timestamp: Date.now()
     }
 
     setPuntosMarcado(prev => [...prev, puntoSimulado])
     setMensaje(`Punto ${puntosMarcado.length + 1} marcado`)
+    vibrar(30) // Feedback táctil
   }
 
   const camposDisponibles = gestorCampos?.campos || []
@@ -501,6 +541,12 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
             </span>
           </div>
           <p className="text-white/70 text-xs">{mensaje}</p>
+          {totalDistance > 0 && (
+            <div className="flex items-center space-x-2 mt-2 text-blue-400 text-xs">
+              <Gauge className="w-3 h-3" />
+              <span>Distancia: {totalDistance.toFixed(2)}m</span>
+            </div>
+          )}
           {error && (
             <div className="flex items-center space-x-2 mt-2 text-red-400 text-xs">
               <AlertCircle className="w-3 h-3" />
@@ -531,6 +577,15 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
               <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
                 Toca para marcar
               </div>
+              
+              {/* Herramientas de cámara */}
+              <CameraTools
+                isActive={isCameraActive}
+                onToggleTool={toggleCameraTool}
+                activTools={activeTools}
+                onMeasurementUpdate={setTotalDistance}
+                walkingPath={walkingPath}
+              />
             </div>
           ) : (
             <div className="h-48 bg-white/5 rounded-lg flex items-center justify-center">

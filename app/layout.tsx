@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Cancha Inteligente Pro',
-  description: 'Aplicación profesional para medición y marcado de campos deportivos',
+  title: 'Lissewege Fields - R.F.C. Lissewege',
+  description: 'Aplicación profesional para medición y marcado de campos del R.F.C. Lissewege - Club de fútbol de Brugge, Bélgica',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'CanchaPro'
+    title: 'Lissewege Fields'
   },
   formatDetection: {
     telephone: false
@@ -20,7 +20,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#22c55e',
+  themeColor: '#1e40af',
 }
 
 export default function RootLayout({
