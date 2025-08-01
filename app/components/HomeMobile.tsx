@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   Target,
@@ -19,6 +20,11 @@ interface HomeMobileProps {
 
 export default function HomeMobile({ onNavigate }: HomeMobileProps) {
   const { campoActivo, gestorCampos } = useAppStore()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const quickActions = [
     {
@@ -144,7 +150,7 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
           >
             <div className="flex items-center space-x-4">
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r ${action.gradient}`}>
-                <action.icon className="w-6 h-6 text-white" />
+                {isClient && <action.icon className="w-6 h-6 text-white" />}
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-semibold">{action.label}</h3>
@@ -160,19 +166,19 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
         <h3 className="text-white font-semibold mb-3">Características</h3>
         <div className="space-y-2">
           <div className="flex items-center space-x-3">
-            <Camera className="w-4 h-4 text-green-400" />
+            {isClient && <Camera className="w-4 h-4 text-green-400" />}
             <span className="text-white/70 text-sm">Cámara integrada para medición</span>
           </div>
           <div className="flex items-center space-x-3">
-            <Gauge className="w-4 h-4 text-blue-400" />
+            {isClient && <Gauge className="w-4 h-4 text-blue-400" />}
             <span className="text-white/70 text-sm">GPS de alta precisión</span>
           </div>
           <div className="flex items-center space-x-3">
-            <Trophy className="w-4 h-4 text-yellow-400" />
+            {isClient && <Trophy className="w-4 h-4 text-yellow-400" />}
             <span className="text-white/70 text-sm">Estándares FIFA</span>
           </div>
           <div className="flex items-center space-x-3">
-            <Users className="w-4 h-4 text-purple-400" />
+            {isClient && <Users className="w-4 h-4 text-purple-400" />}
             <span className="text-white/70 text-sm">Múltiples campos</span>
           </div>
         </div>
