@@ -20,6 +20,8 @@ const translations = {
     'nav.marking': 'Marcado',
     'nav.fields': 'Campos',
     'nav.history': 'Historial',
+    'nav.export': 'Exportar',
+    'nav.map': 'Mapa',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
@@ -94,6 +96,7 @@ const translations = {
     'status.inactive': 'Inactivo',
     'status.measuring': 'Midiendo...',
     'status.marking': 'Marcando...',
+    'status.gps': 'GPS Activo',
     
     // Botones generales
     'btn.start': 'Iniciar',
@@ -113,6 +116,8 @@ const translations = {
     'nav.marking': 'Markering',
     'nav.fields': 'Velden',
     'nav.history': 'Geschiedenis',
+    'nav.export': 'Exporteren',
+    'nav.map': 'Kaart',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
@@ -187,6 +192,7 @@ const translations = {
     'status.inactive': 'Inactief',
     'status.measuring': 'Aan het meten...',
     'status.marking': 'Aan het markeren...',
+    'status.gps': 'GPS Actief',
     
     // Algemene knoppen
     'btn.start': 'Starten',
@@ -206,6 +212,8 @@ const translations = {
     'nav.marking': 'Marking',
     'nav.fields': 'Fields',
     'nav.history': 'History',
+    'nav.export': 'Export',
+    'nav.map': 'Map',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
@@ -280,6 +288,7 @@ const translations = {
     'status.inactive': 'Inactive',
     'status.measuring': 'Measuring...',
     'status.marking': 'Marking...',
+    'status.gps': 'GPS Active',
     
     // General buttons
     'btn.start': 'Start',

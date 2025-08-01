@@ -1,7 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import Navigation from './Navigation'
+import LanguageSelector from './LanguageSelector'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface HeaderProps {
   onNavigate: (section: string) => void
@@ -9,6 +12,13 @@ interface HeaderProps {
 }
 
 export default function Header({ onNavigate, activeSection }: HeaderProps) {
+  const [isClient, setIsClient] = useState(false)
+  const { t } = useLanguage()
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
     <motion.header
       className="futbol-header"
@@ -29,22 +39,31 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
               <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div className="futbol-logo-text">Cancha Inteligente</div>
+          <div className="futbol-logo-text">
+            {isClient ? 'Lissewege Fields' : 'Cancha Inteligente'}
+          </div>
         </motion.div>
 
         <Navigation onNavigate={onNavigate} activeSection={activeSection} />
 
-        <motion.div
-          className="futbol-indicator success"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="2"/>
-          </svg>
-          <span>GPS Activo</span>
-        </motion.div>
+        <div className="flex items-center space-x-4">
+          {/* Selector de idiomas */}
+          {isClient && (
+            <LanguageSelector variant="compact" position="top-right" />
+          )}
+          
+          <motion.div
+            className="futbol-indicator success"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+            <span>{t('status.gps')}</span>
+          </motion.div>
+        </div>
       </div>
     </motion.header>
   )
