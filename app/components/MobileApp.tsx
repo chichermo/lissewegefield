@@ -67,38 +67,38 @@ export default function MobileApp({
   const navItems = [
     {
       id: 'inicio',
-      label: t('nav.home'),
+      label: isClient ? t('nav.home') : 'Inicio',
       icon: Home,
       color: 'bg-blue-500',
-      description: t('home.subtitle')
+      description: isClient ? t('home.subtitle') : 'Panel principal'
     },
     {
       id: 'marcado',
-      label: t('nav.marking'),
+      label: isClient ? t('nav.marking') : 'Marcado',
       icon: MapPin,
       color: 'bg-green-500',
-      description: t('home.marking.desc')
+      description: isClient ? t('home.marking.desc') : 'Marcar líneas del campo'
     },
     {
       id: 'medicion',
-      label: t('nav.measurement'),
+      label: isClient ? t('nav.measurement') : 'Medición',
       icon: Target,
       color: 'bg-purple-500',
-      description: t('home.measurement.desc')
+      description: isClient ? t('home.measurement.desc') : 'Medir dimensiones'
     },
     {
       id: 'campos',
-      label: t('nav.fields'),
+      label: isClient ? t('nav.fields') : 'Campos',
       icon: Grid3X3,
       color: 'bg-indigo-500',
-      description: t('home.fields.desc')
+      description: isClient ? t('home.fields.desc') : 'Gestionar campos'
     },
     {
       id: 'historial',
-      label: t('nav.history'),
+      label: isClient ? t('nav.history') : 'Historial',
       icon: History,
       color: 'bg-yellow-500',
-      description: t('home.history.desc')
+      description: isClient ? t('home.history.desc') : 'Ver mediciones'
     }
   ]
 
@@ -137,7 +137,11 @@ export default function MobileApp({
                 {isClient ? 'Lissewege Fields' : 'CanchaPro'}
               </h1>
               <p className="text-white/80 text-xs">
-                {campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')}
+                {isClient ? (
+                  campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')
+                ) : (
+                  campoActivo ? `Campo: ${campoActivo.nombre}` : 'Sin campo seleccionado'
+                )}
               </p>
             </div>
           </div>
