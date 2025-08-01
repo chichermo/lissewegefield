@@ -20,6 +20,7 @@ import {
 import { useAppStore } from '../../stores/useAppStore'
 import { PuntoGPS, LineaMarcado } from '../../types'
 import CameraTools from './CameraTools'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface MarcadoMobileProps {
   isRecording?: boolean
@@ -27,6 +28,7 @@ interface MarcadoMobileProps {
 }
 
 export default function MarcadoMobile({ isRecording, onRecordingChange }: MarcadoMobileProps) {
+  const { t } = useLanguage()
   const {
     lineasMarcado: lineasGlobales,
     setLineasMarcado: setLineasGlobales,
@@ -96,11 +98,11 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
   useEffect(() => {
     if (lineasGlobales.length === 0) {
       const lineasPredeterminadas: LineaMarcado[] = [
-        { id: 1, nombre: 'Línea de Meta Norte', tipo: 'horizontal', distancia: 0, completada: false, progreso: 0, posicion: 'top' },
-        { id: 2, nombre: 'Línea de Meta Sur', tipo: 'horizontal', distancia: 0, completada: false, progreso: 0, posicion: 'bottom' },
-        { id: 3, nombre: 'Línea Lateral Izquierda', tipo: 'vertical', distancia: 0, completada: false, progreso: 0, posicion: 'left' },
-        { id: 4, nombre: 'Línea Lateral Derecha', tipo: 'vertical', distancia: 0, completada: false, progreso: 0, posicion: 'right' },
-        { id: 5, nombre: 'Círculo Central', tipo: 'circular', distancia: 0, completada: false, progreso: 0, posicion: 'center' }
+            { id: 1, nombre: t('marking.line.goal.north'), tipo: 'horizontal', distancia: 0, completada: false, progreso: 0, posicion: 'top' },
+    { id: 2, nombre: t('marking.line.goal.south'), tipo: 'horizontal', distancia: 0, completada: false, progreso: 0, posicion: 'bottom' },
+    { id: 3, nombre: t('marking.line.side.left'), tipo: 'vertical', distancia: 0, completada: false, progreso: 0, posicion: 'left' },
+    { id: 4, nombre: t('marking.line.side.right'), tipo: 'vertical', distancia: 0, completada: false, progreso: 0, posicion: 'right' },
+    { id: 5, nombre: t('marking.circle.center'), tipo: 'circular', distancia: 0, completada: false, progreso: 0, posicion: 'center' }
       ]
       setLineasGlobales(lineasPredeterminadas)
       setLineasMarcado(lineasPredeterminadas)
@@ -146,7 +148,7 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
   const iniciarCamara = async () => {
     try {
       setError(null)
-      setMensaje('Activando cámara...')
+      setMensaje(t('marking.camera.activating'))
       
       // Intentar con diferentes configuraciones para mayor compatibilidad
       const constraints = [
@@ -172,12 +174,12 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
       
       streamRef.current = stream
       setIsCameraActive(true)
-      setMensaje('Cámara activa. Toca la pantalla para marcar puntos.')
+      setMensaje(t('marking.camera.active'))
       vibrar(50) // Feedback táctil
     } catch (error) {
       console.error('Error al iniciar cámara:', error)
-      setError('No se pudo acceder a la cámara. Verifica los permisos.')
-      setMensaje('Error al iniciar cámara.')
+      setError(t('marking.camera.error'))
+      setMensaje(t('marking.camera.error.init'))
       vibrar([100, 50, 100]) // Patrón de vibración para error
     }
   }
@@ -188,7 +190,7 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
       streamRef.current = null
     }
     setIsCameraActive(false)
-    setMensaje('Cámara detenida.')
+    setMensaje(t('marking.camera.stopped'))
   }
 
   // Efecto para asignar stream al video
@@ -240,11 +242,11 @@ export default function MarcadoMobile({ isRecording, onRecordingChange }: Marcad
       }
 
       if (modoMarcado === 'gps') {
-        setMensaje('Obteniendo posición GPS...')
+        setMensaje(t('marking.gps.getting'))
         const posicion = await obtenerPosicionGPS()
         setCurrentPosition(posicion)
         setPuntosMarcado([posicion])
-        setMensaje('GPS activo. Mueve el dispositivo para marcar líneas.')
+        setMensaje(t('marking.gps.active'))
         
         // Iniciar seguimiento GPS
         watchIdRef.current = navigator.geolocation.watchPosition(

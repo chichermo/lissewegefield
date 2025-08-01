@@ -16,6 +16,7 @@ import {
 import { useAppStore } from '../../stores/useAppStore'
 import { Medicion, PuntoGPS } from '../../types'
 import CameraTools from './CameraTools'
+import { useLanguage } from '../contexts/LanguageContext'
 // import MobileNotifications, { useNotifications } from './MobileNotifications'
 
 interface MedicionMobileProps {
@@ -24,6 +25,7 @@ interface MedicionMobileProps {
 }
 
 export default function MedicionMobile({ isRecording, onRecordingChange }: MedicionMobileProps) {
+  const { t } = useLanguage()
   const {
     mediciones: medicionesGlobales,
     setMediciones: setMedicionesGlobales,
@@ -42,7 +44,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   const [modoMedicion, setModoMedicion] = useState<'gps' | 'camara'>('gps')
   
   // Estados de UI
-  const [mensaje, setMensaje] = useState('Toca "Iniciar" para comenzar la medición')
+  const [mensaje, setMensaje] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [showFieldSelector, setShowFieldSelector] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
@@ -52,6 +54,11 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   const [activeTools, setActiveTools] = useState<string[]>([])
   const [walkingPath, setWalkingPath] = useState<Array<{ x: number; y: number; timestamp: number }>>([])
   const [totalDistance, setTotalDistance] = useState(0)
+
+  // Inicializar mensaje traducido
+  useEffect(() => {
+    setMensaje(t('measurement.tap.start'))
+  }, [t])
 
   // Referencias
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -160,7 +167,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   const iniciarCamara = async () => {
     try {
       setError(null)
-      setMensaje('Activando cámara...')
+              setMensaje(t('measurement.camera.activating'))
       
       // Intentar con diferentes configuraciones para mayor compatibilidad
       const constraints = [
@@ -186,13 +193,13 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
       
       streamRef.current = stream
       setIsCameraActive(true)
-      setMensaje('Cámara activa. Toca la pantalla para capturar puntos.')
+              setMensaje(t('measurement.camera.active'))
       vibrar(50) // Feedback táctil
       // notifyCameraStatus(true)
     } catch (error) {
       console.error('Error al iniciar cámara:', error)
-      setError('No se pudo acceder a la cámara. Verifica los permisos.')
-      setMensaje('Error al iniciar cámara.')
+      setError(t('measurement.camera.error'))
+      setMensaje(t('measurement.camera.error.init'))
       vibrar([100, 50, 100]) // Patrón de vibración para error
       // notifyCameraStatus(false)
     }
@@ -204,7 +211,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
       streamRef.current = null
     }
     setIsCameraActive(false)
-    setMensaje('Cámara detenida.')
+          setMensaje(t('measurement.camera.stopped'))
   }
 
   // Efecto para asignar stream al video
@@ -289,7 +296,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
       }
 
       if (modoMedicion === 'gps') {
-        setMensaje('Obteniendo posición GPS...')
+        setMensaje(t('measurement.gps.getting'))
         const posicion = await obtenerPosicionGPS()
         setCurrentPosition(posicion)
         setPuntosMedicion([posicion])
@@ -358,7 +365,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
       calcularMediciones()
       vibrar([50, 50, 50]) // Patrón de éxito
     } else {
-      setMensaje('Medición detenida. Se necesitan al menos 2 puntos.')
+              setMensaje(t('measurement.stopped'))
     }
   }
 
@@ -407,7 +414,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   const reiniciarMedicion = () => {
     setPuntosMedicion([])
     setMediciones(mediciones.map(m => ({ ...m, distancia: 0, cumpleFIFA: false })))
-    setMensaje('Medición reiniciada.')
+    setMensaje(t('measurement.reset'))
   }
 
   const capturarPuntoCamara = (event: React.MouseEvent<HTMLDivElement>) => {
