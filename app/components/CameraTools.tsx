@@ -80,7 +80,14 @@ export default function CameraTools({
 }: CameraToolsProps) {
   const [showSettings, setShowSettings] = useState(false)
   const [guideLineWidth, setGuideLineWidth] = useState(15) // centímetros
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
+  const [isClient, setIsClient] = useState(false)
   const pathCanvasRef = useRef<HTMLCanvasElement>(null)
+
+  // Detectar lado del cliente para evitar errores de hidratación
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Calcular rectitud del camino
   const calculateStraightness = () => {
@@ -110,6 +117,24 @@ export default function CameraTools({
     const straightness = (totalDistance / actualDistance) * 100
     return Math.min(100, Math.max(0, straightness))
   }
+
+  // Configurar dimensiones del canvas
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      setCanvasSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+
+    if (typeof window !== 'undefined') {
+      updateCanvasSize()
+      window.addEventListener('resize', updateCanvasSize)
+      return () => window.removeEventListener('resize', updateCanvasSize)
+    }
+    
+    return undefined
+  }, [])
 
   // Actualizar medición cuando cambia el camino
   useEffect(() => {
@@ -179,6 +204,9 @@ export default function CameraTools({
 
   const straightness = calculateStraightness()
 
+  // Debug: Mostrar siempre para probar
+  console.log('CameraTools isActive:', isActive, 'activTools:', activTools)
+
   if (!isActive) return null
 
   return (
@@ -243,11 +271,11 @@ export default function CameraTools({
         )}
 
         {/* Canvas para rastreador de ruta */}
-        {activTools.includes('path-tracker') && (
+        {activTools.includes('path-tracker') && canvasSize.width > 0 && (
           <canvas
             ref={pathCanvasRef}
-            width={window.innerWidth}
-            height={window.innerHeight}
+            width={canvasSize.width}
+            height={canvasSize.height}
             className="absolute inset-0 pointer-events-none"
             style={{ width: '100%', height: '100%' }}
           />
@@ -283,7 +311,7 @@ export default function CameraTools({
               onClick={() => setShowSettings(!showSettings)}
               className="p-2 bg-white/10 rounded-lg"
             >
-              <Settings className="w-4 h-4 text-white" />
+              {isClient && <Settings className="w-4 h-4 text-white" />}
             </button>
           </div>
 
@@ -300,9 +328,10 @@ export default function CameraTools({
                 }`}
               >
                 <div className="flex items-center space-x-2">
-                  <tool.icon className="w-4 h-4 text-white" />
+                  {isClient && <tool.icon className="w-4 h-4 text-white" />}
                   <span className="text-white text-sm font-medium">{tool.name}</span>
                 </div>
+                <div className="text-xs text-white/70 mt-1">{tool.description}</div>
               </button>
             ))}
           </div>
