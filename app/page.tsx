@@ -19,6 +19,7 @@ import MobileApp from './components/MobileApp'
 import MedicionMobile from './components/MedicionMobile'
 import MarcadoMobile from './components/MarcadoMobile'
 import HomeMobile from './components/HomeMobile'
+import { LanguageProvider } from './contexts/LanguageContext'
 
 
 export default function Home() {
@@ -129,7 +130,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
+    <LanguageProvider>
+      <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
       {/* Versión móvil */}
       <div className="lg:hidden">
         <MobileApp 
@@ -197,6 +199,7 @@ export default function Home() {
       
       {/* PWA Installer */}
       <PWAInstaller />
-    </div>
+      </div>
+    </LanguageProvider>
   )
 }
