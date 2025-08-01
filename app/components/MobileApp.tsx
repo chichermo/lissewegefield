@@ -20,6 +20,8 @@ import {
   WifiOff
 } from 'lucide-react'
 import { useAppStore } from '@/stores/useAppStore'
+import { useLanguage } from '../contexts/LanguageContext'
+import LanguageSelector from './LanguageSelector'
 
 interface MobileAppProps {
   onNavigate: (section: string) => void
@@ -40,6 +42,7 @@ export default function MobileApp({
   const [isOnline, setIsOnline] = useState(true)
   const [showStatus, setShowStatus] = useState(false)
   const { campoActivo } = useAppStore()
+  const { t } = useLanguage()
 
   // Verificar estado de conexión
   useEffect(() => {
@@ -58,38 +61,38 @@ export default function MobileApp({
   const navItems = [
     {
       id: 'inicio',
-      label: 'Inicio',
+      label: t('nav.home'),
       icon: Home,
       color: 'bg-blue-500',
-      description: 'Panel principal'
+      description: t('home.subtitle')
     },
     {
       id: 'marcado',
-      label: 'Marcado',
+      label: t('nav.marking'),
       icon: MapPin,
       color: 'bg-green-500',
-      description: 'Marcar líneas del campo'
+      description: t('home.marking.desc')
     },
     {
       id: 'medicion',
-      label: 'Medición',
+      label: t('nav.measurement'),
       icon: Target,
       color: 'bg-purple-500',
-      description: 'Medir dimensiones'
+      description: t('home.measurement.desc')
     },
     {
       id: 'campos',
-      label: 'Campos',
+      label: t('nav.fields'),
       icon: Grid3X3,
       color: 'bg-indigo-500',
-      description: 'Gestionar campos'
+      description: t('home.fields.desc')
     },
     {
       id: 'historial',
-      label: 'Historial',
+      label: t('nav.history'),
       icon: History,
       color: 'bg-yellow-500',
-      description: 'Ver mediciones'
+      description: t('home.history.desc')
     }
   ]
 
@@ -124,14 +127,19 @@ export default function MobileApp({
               <Smartphone className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-white font-bold text-lg">CanchaPro</h1>
+              <h1 className="text-white font-bold text-lg">Lissewege Fields</h1>
               <p className="text-white/80 text-xs">
-                {campoActivo ? `Campo: ${campoActivo.nombre}` : 'Sin campo seleccionado'}
+                {campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')}
               </p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
+            {/* Selector de idiomas */}
+            <div className="relative z-50">
+              <LanguageSelector variant="compact" position="top-right" />
+            </div>
+            
             {/* Indicador de conexión */}
             <div className={`p-2 rounded-lg ${isOnline ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
               {isOnline ? <Wifi className="w-4 h-4 text-green-400" /> : <WifiOff className="w-4 h-4 text-red-400" />}

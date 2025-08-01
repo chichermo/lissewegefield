@@ -14,7 +14,6 @@ import {
 } from 'lucide-react'
 import { useAppStore } from '../../stores/useAppStore'
 import { useLanguage } from '../contexts/LanguageContext'
-import LanguageSelector from './LanguageSelector'
 
 interface HomeMobileProps {
   onNavigate: (section: string) => void
@@ -87,9 +86,6 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
 
   return (
     <div className="space-y-6">
-      {/* Selector de idiomas */}
-      <LanguageSelector position="top-right" />
-      
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
         <div className="text-center">
