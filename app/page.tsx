@@ -4,9 +4,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Navigation from './components/Navigation'
-import MedicionCancha from './components/MedicionCancha'
 import MedicionAvanzada from './components/MedicionAvanzada'
-import MarcadoInteligente from './components/MarcadoInteligente'
 import MapaVisual from './components/MapaVisual'
 import HistorialMediciones from './components/HistorialMediciones'
 import CalendarioMarcado from './components/CalendarioMarcado'
@@ -18,6 +16,9 @@ import GuiaVisual from './components/GuiaVisual'
 import GestorCampos from './components/GestorCampos'
 import PWAInstaller from './components/PWAInstaller'
 import MobileApp from './components/MobileApp'
+import MedicionMobile from './components/MedicionMobile'
+import MarcadoMobile from './components/MarcadoMobile'
+import HomeMobile from './components/HomeMobile'
 
 
 export default function Home() {
@@ -54,89 +55,26 @@ export default function Home() {
   const renderizarSeccion = () => {
     switch (seccionActiva) {
       case 'inicio':
-        return (
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="futbol-card text-center">
-              <h1 className="text-4xl font-bold text-white mb-4">
-                Cancha Inteligente Pro
-              </h1>
-              <p className="text-xl text-white/70 mb-6">
-                Sistema profesional de medición y marcado de canchas FIFA
-              </p>
-              <div className="flex justify-center gap-4">
-                <motion.button
-                  onClick={() => setSeccionActiva('medicion')}
-                  className="futbol-btn futbol-btn-primary"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Iniciar Medición
-                </motion.button>
-                <motion.button
-                  onClick={() => setSeccionActiva('plantillas')}
-                  className="futbol-btn futbol-btn-success"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Ver Plantillas FIFA
-                </motion.button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <motion.div
-                className="futbol-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <h3 className="text-lg font-bold text-white mb-3">🎯 Precisión FIFA</h3>
-                <p className="text-white/70">
-                  Medición con precisión milimétrica según estándares oficiales FIFA
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="futbol-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <h3 className="text-lg font-bold text-white mb-3">🛰️ GPS RTK</h3>
-                <p className="text-white/70">
-                  GPS de alta precisión con tecnología RTK para mediciones profesionales
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="futbol-card"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <h3 className="text-lg font-bold text-white mb-3">📊 Reportes Avanzados</h3>
-                <p className="text-white/70">
-                  Generación automática de reportes con análisis detallado
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        )
+        return <HomeMobile onNavigate={setSeccionActiva} />
 
       case 'medicion':
-        return <MedicionCancha />
-      
-
+        return (
+          <MedicionMobile 
+            isRecording={isRecording}
+            onRecordingChange={setIsRecording}
+          />
+        )
       
       case 'medicion-avanzada':
         return <MedicionAvanzada />
       
       case 'marcado':
-        return <MarcadoInteligente />
+        return (
+          <MarcadoMobile 
+            isRecording={isRecording}
+            onRecordingChange={setIsRecording}
+          />
+        )
       
       case 'mapa':
         return <MapaVisual />

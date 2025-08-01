@@ -7,19 +7,13 @@ import {
   MapPin,
   Target,
   Grid3X3,
-  Download,
-  Globe,
   History,
-  Calendar,
-  Package,
   Menu,
   X,
-  Camera,
   Play,
   Pause,
   RotateCcw,
   CheckCircle,
-  AlertCircle,
   Settings,
   Smartphone,
   Wifi,
@@ -45,7 +39,7 @@ export default function MobileApp({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
   const [showStatus, setShowStatus] = useState(false)
-  const { gestorCampos, campoActivo } = useAppStore()
+  const { campoActivo } = useAppStore()
 
   // Verificar estado de conexión
   useEffect(() => {
