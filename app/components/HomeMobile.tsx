@@ -13,6 +13,8 @@ import {
   Users
 } from 'lucide-react'
 import { useAppStore } from '../../stores/useAppStore'
+import { useLanguage } from '../contexts/LanguageContext'
+import LanguageSelector from './LanguageSelector'
 
 interface HomeMobileProps {
   onNavigate: (section: string) => void
@@ -20,6 +22,7 @@ interface HomeMobileProps {
 
 export default function HomeMobile({ onNavigate }: HomeMobileProps) {
   const { campoActivo, gestorCampos } = useAppStore()
+  const { t } = useLanguage()
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -29,32 +32,32 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
   const quickActions = [
     {
       id: 'medicion',
-      label: 'Medición',
-      description: 'Medir dimensiones del campo',
+      label: t('home.measurement'),
+      description: t('home.measurement.desc'),
       icon: Target,
       color: 'bg-green-500',
       gradient: 'from-green-500 to-green-600'
     },
     {
       id: 'marcado',
-      label: 'Marcado',
-      description: 'Marcar líneas del campo',
+      label: t('home.marking'),
+      description: t('home.marking.desc'),
       icon: MapPin,
       color: 'bg-blue-500',
       gradient: 'from-blue-500 to-blue-600'
     },
     {
       id: 'campos',
-      label: 'Campos',
-      description: 'Gestionar campos deportivos',
+      label: t('home.fields'),
+      description: t('home.fields.desc'),
       icon: Grid3X3,
       color: 'bg-purple-500',
       gradient: 'from-purple-500 to-purple-600'
     },
     {
       id: 'historial',
-      label: 'Historial',
-      description: 'Ver mediciones anteriores',
+      label: t('home.history'),
+      description: t('home.history.desc'),
       icon: History,
       color: 'bg-yellow-500',
       gradient: 'from-yellow-500 to-yellow-600'
@@ -63,19 +66,19 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
 
   const stats = [
     {
-      label: 'Campos',
+      label: t('home.fields'),
       value: gestorCampos?.campos.length || 0,
       icon: Grid3X3,
       color: 'text-blue-400'
     },
     {
-      label: 'Mediciones',
+      label: t('nav.measurement'),
       value: gestorCampos?.campos.reduce((total, campo) => total + campo.estadisticas.totalMediciones, 0) || 0,
       icon: Target,
       color: 'text-green-400'
     },
     {
-      label: 'Marcados',
+      label: t('nav.marking'),
       value: gestorCampos?.campos.reduce((total, campo) => total + campo.estadisticas.totalMarcados, 0) || 0,
       icon: MapPin,
       color: 'text-purple-400'
@@ -84,16 +87,22 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
 
   return (
     <div className="space-y-6">
+      {/* Selector de idiomas */}
+      <LanguageSelector position="top-right" />
+      
       {/* Header */}
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
         <div className="text-center">
           <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Trophy className="w-8 h-8 text-white" />
+            {isClient && <Trophy className="w-8 h-8 text-white" />}
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Lissewege Fields</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">{t('home.title')}</h1>
           <p className="text-blue-200 text-sm font-medium mb-1">R.F.C. Lissewege - 4718</p>
           <p className="text-white/60 text-xs">
             Pol Dhondtstraat 70, 8380 Lissewege, Brugge
+          </p>
+          <p className="text-white/50 text-xs mt-2">
+            {t('home.subtitle')}
           </p>
         </div>
       </div>
@@ -163,23 +172,23 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
 
       {/* Características destacadas */}
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-        <h3 className="text-white font-semibold mb-3">Características</h3>
+        <h3 className="text-white font-semibold mb-3">{t('home.features')}</h3>
         <div className="space-y-2">
           <div className="flex items-center space-x-3">
             {isClient && <Camera className="w-4 h-4 text-green-400" />}
-            <span className="text-white/70 text-sm">Cámara integrada para medición</span>
+            <span className="text-white/70 text-sm">{t('home.camera')}</span>
           </div>
           <div className="flex items-center space-x-3">
             {isClient && <Gauge className="w-4 h-4 text-blue-400" />}
-            <span className="text-white/70 text-sm">GPS de alta precisión</span>
+            <span className="text-white/70 text-sm">{t('home.gps')}</span>
           </div>
           <div className="flex items-center space-x-3">
             {isClient && <Trophy className="w-4 h-4 text-yellow-400" />}
-            <span className="text-white/70 text-sm">Estándares FIFA</span>
+            <span className="text-white/70 text-sm">{t('home.fifa')}</span>
           </div>
           <div className="flex items-center space-x-3">
             {isClient && <Users className="w-4 h-4 text-purple-400" />}
-            <span className="text-white/70 text-sm">Múltiples campos</span>
+            <span className="text-white/70 text-sm">{t('home.multiple')}</span>
           </div>
         </div>
       </div>

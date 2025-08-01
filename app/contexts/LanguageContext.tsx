@@ -1,0 +1,332 @@
+'use client'
+
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+
+export type Language = 'es' | 'nl' | 'en'
+
+interface LanguageContextType {
+  language: Language
+  setLanguage: (lang: Language) => void
+  t: (key: string) => string
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+
+const translations = {
+  es: {
+    // Navegación
+    'nav.home': 'Inicio',
+    'nav.measurement': 'Medición',
+    'nav.marking': 'Marcado',
+    'nav.fields': 'Campos',
+    'nav.history': 'Historial',
+    
+    // Home
+    'home.title': 'Lissewege Fields - R.F.C. Lissewege',
+    'home.subtitle': 'Sistema inteligente para medición y marcado de campos',
+    'home.measurement': 'Medición',
+    'home.measurement.desc': 'Medir dimensiones del campo',
+    'home.marking': 'Marcado',
+    'home.marking.desc': 'Marcar líneas del campo',
+    'home.fields': 'Campos',
+    'home.fields.desc': 'Gestionar campos deportivos',
+    'home.history': 'Historial',
+    'home.history.desc': 'Ver mediciones anteriores',
+    'home.features': 'Características',
+    'home.camera': 'Cámara integrada para medición',
+    'home.gps': 'GPS de alta precisión',
+    'home.fifa': 'Estándares FIFA',
+    'home.multiple': 'Múltiples campos',
+    
+    // Herramientas de cámara
+    'camera.tools': 'Herramientas de Cámara',
+    'camera.tracking': 'Punto de Seguimiento',
+    'camera.tracking.desc': 'Punto central para seguir al caminar',
+    'camera.guidelines': 'Líneas Guía',
+    'camera.guidelines.desc': 'Líneas paralelas para mantener rectitud',
+    'camera.measurement': 'Metraje en Vivo',
+    'camera.measurement.desc': 'Medición en tiempo real en pantalla',
+    'camera.tracker': 'Rastreador de Ruta',
+    'camera.tracker.desc': 'Visualizar camino recorrido',
+    'camera.straightness': 'Verificador de Rectitud',
+    'camera.straightness.desc': 'Analizar si la línea está derecha',
+    'camera.width': 'Ancho líneas guía',
+    'camera.distance': 'Distancia recorrida',
+    'camera.rectitude': 'Rectitud',
+    
+    // Medición
+    'measurement.title': 'Medición Móvil',
+    'measurement.start': 'Iniciar Medición',
+    'measurement.stop': 'Detener Medición',
+    'measurement.camera.start': 'Activar Cámara',
+    'measurement.camera.stop': 'Desactivar Cámara',
+    'measurement.gps.start': 'Activar GPS',
+    'measurement.gps.stop': 'Desactivar GPS',
+    'measurement.capture': 'Capturar Punto',
+    'measurement.clear': 'Limpiar',
+    'measurement.points': 'puntos',
+    'measurement.distance.estimated': 'Distancia estimada',
+    'measurement.advanced': 'Modo Avanzado',
+    'measurement.tap.capture': 'Toca para capturar',
+    'measurement.camera.inactive': 'Cámara no activa',
+    
+    // Marcado
+    'marking.title': 'Marcado Móvil',
+    'marking.line.center': 'Línea Central',
+    'marking.line.penalty': 'Área Penal',
+    'marking.line.corner': 'Círculo Esquina',
+    'marking.line.goal': 'Área de Meta',
+    'marking.progress': 'Progreso',
+    'marking.complete': 'Completar Línea',
+    'marking.reset': 'Reiniciar Marcado',
+    
+    // Configuración
+    'settings.language': 'Idioma',
+    'settings.spanish': 'Español',
+    'settings.dutch': 'Holandés',
+    'settings.english': 'Inglés',
+    
+    // Estados
+    'status.online': 'En línea',
+    'status.offline': 'Sin conexión',
+    'status.connecting': 'Conectando...',
+    'status.active': 'Activo',
+    'status.inactive': 'Inactivo',
+    'status.measuring': 'Midiendo...',
+    'status.marking': 'Marcando...',
+    
+    // Botones generales
+    'btn.start': 'Iniciar',
+    'btn.stop': 'Detener',
+    'btn.continue': 'Continuar',
+    'btn.complete': 'Completar',
+    'btn.cancel': 'Cancelar',
+    'btn.save': 'Guardar',
+    'btn.clear': 'Limpiar',
+    'btn.reset': 'Reiniciar'
+  },
+  
+  nl: {
+    // Navigatie
+    'nav.home': 'Home',
+    'nav.measurement': 'Meting',
+    'nav.marking': 'Markering',
+    'nav.fields': 'Velden',
+    'nav.history': 'Geschiedenis',
+    
+    // Home
+    'home.title': 'Lissewege Fields - R.F.C. Lissewege',
+    'home.subtitle': 'Intelligent systeem voor veldmeting en -markering',
+    'home.measurement': 'Meting',
+    'home.measurement.desc': 'Veldafmetingen meten',
+    'home.marking': 'Markering',
+    'home.marking.desc': 'Veldlijnen markeren',
+    'home.fields': 'Velden',
+    'home.fields.desc': 'Sportvelden beheren',
+    'home.history': 'Geschiedenis',
+    'home.history.desc': 'Vorige metingen bekijken',
+    'home.features': 'Kenmerken',
+    'home.camera': 'Geïntegreerde camera voor meting',
+    'home.gps': 'Hoge precisie GPS',
+    'home.fifa': 'FIFA-standaarden',
+    'home.multiple': 'Meerdere velden',
+    
+    // Camera tools
+    'camera.tools': 'Camera Gereedschappen',
+    'camera.tracking': 'Volgpunt',
+    'camera.tracking.desc': 'Centraal punt om te volgen tijdens het lopen',
+    'camera.guidelines': 'Gidslijnen',
+    'camera.guidelines.desc': 'Parallelle lijnen voor rechtheid',
+    'camera.measurement': 'Live Meting',
+    'camera.measurement.desc': 'Real-time meting op scherm',
+    'camera.tracker': 'Route Tracker',
+    'camera.tracker.desc': 'Gelopen pad visualiseren',
+    'camera.straightness': 'Rechtheid Checker',
+    'camera.straightness.desc': 'Analyseren of lijn recht is',
+    'camera.width': 'Breedte gidslijnen',
+    'camera.distance': 'Afgelegde afstand',
+    'camera.rectitude': 'Rechtheid',
+    
+    // Meting
+    'measurement.title': 'Mobiele Meting',
+    'measurement.start': 'Meting Starten',
+    'measurement.stop': 'Meting Stoppen',
+    'measurement.camera.start': 'Camera Activeren',
+    'measurement.camera.stop': 'Camera Deactiveren',
+    'measurement.gps.start': 'GPS Activeren',
+    'measurement.gps.stop': 'GPS Deactiveren',
+    'measurement.capture': 'Punt Vastleggen',
+    'measurement.clear': 'Wissen',
+    'measurement.points': 'punten',
+    'measurement.distance.estimated': 'Geschatte afstand',
+    'measurement.advanced': 'Geavanceerde Modus',
+    'measurement.tap.capture': 'Tik om vast te leggen',
+    'measurement.camera.inactive': 'Camera niet actief',
+    
+    // Markering
+    'marking.title': 'Mobiele Markering',
+    'marking.line.center': 'Middenlijn',
+    'marking.line.penalty': 'Strafschopgebied',
+    'marking.line.corner': 'Hoekschop Cirkel',
+    'marking.line.goal': 'Doelgebied',
+    'marking.progress': 'Voortgang',
+    'marking.complete': 'Lijn Voltooien',
+    'marking.reset': 'Markering Herstellen',
+    
+    // Instellingen
+    'settings.language': 'Taal',
+    'settings.spanish': 'Spaans',
+    'settings.dutch': 'Nederlands',
+    'settings.english': 'Engels',
+    
+    // Status
+    'status.online': 'Online',
+    'status.offline': 'Offline',
+    'status.connecting': 'Verbinden...',
+    'status.active': 'Actief',
+    'status.inactive': 'Inactief',
+    'status.measuring': 'Aan het meten...',
+    'status.marking': 'Aan het markeren...',
+    
+    // Algemene knoppen
+    'btn.start': 'Starten',
+    'btn.stop': 'Stoppen',
+    'btn.continue': 'Doorgaan',
+    'btn.complete': 'Voltooien',
+    'btn.cancel': 'Annuleren',
+    'btn.save': 'Opslaan',
+    'btn.clear': 'Wissen',
+    'btn.reset': 'Herstellen'
+  },
+  
+  en: {
+    // Navigation
+    'nav.home': 'Home',
+    'nav.measurement': 'Measurement',
+    'nav.marking': 'Marking',
+    'nav.fields': 'Fields',
+    'nav.history': 'History',
+    
+    // Home
+    'home.title': 'Lissewege Fields - R.F.C. Lissewege',
+    'home.subtitle': 'Intelligent system for field measurement and marking',
+    'home.measurement': 'Measurement',
+    'home.measurement.desc': 'Measure field dimensions',
+    'home.marking': 'Marking',
+    'home.marking.desc': 'Mark field lines',
+    'home.fields': 'Fields',
+    'home.fields.desc': 'Manage sports fields',
+    'home.history': 'History',
+    'home.history.desc': 'View previous measurements',
+    'home.features': 'Features',
+    'home.camera': 'Integrated camera for measurement',
+    'home.gps': 'High precision GPS',
+    'home.fifa': 'FIFA standards',
+    'home.multiple': 'Multiple fields',
+    
+    // Camera tools
+    'camera.tools': 'Camera Tools',
+    'camera.tracking': 'Tracking Point',
+    'camera.tracking.desc': 'Central point to follow while walking',
+    'camera.guidelines': 'Guide Lines',
+    'camera.guidelines.desc': 'Parallel lines to maintain straightness',
+    'camera.measurement': 'Live Measurement',
+    'camera.measurement.desc': 'Real-time measurement on screen',
+    'camera.tracker': 'Path Tracker',
+    'camera.tracker.desc': 'Visualize walked path',
+    'camera.straightness': 'Straightness Checker',
+    'camera.straightness.desc': 'Analyze if line is straight',
+    'camera.width': 'Guide lines width',
+    'camera.distance': 'Distance covered',
+    'camera.rectitude': 'Straightness',
+    
+    // Measurement
+    'measurement.title': 'Mobile Measurement',
+    'measurement.start': 'Start Measurement',
+    'measurement.stop': 'Stop Measurement',
+    'measurement.camera.start': 'Activate Camera',
+    'measurement.camera.stop': 'Deactivate Camera',
+    'measurement.gps.start': 'Activate GPS',
+    'measurement.gps.stop': 'Deactivate GPS',
+    'measurement.capture': 'Capture Point',
+    'measurement.clear': 'Clear',
+    'measurement.points': 'points',
+    'measurement.distance.estimated': 'Estimated distance',
+    'measurement.advanced': 'Advanced Mode',
+    'measurement.tap.capture': 'Tap to capture',
+    'measurement.camera.inactive': 'Camera not active',
+    
+    // Marking
+    'marking.title': 'Mobile Marking',
+    'marking.line.center': 'Center Line',
+    'marking.line.penalty': 'Penalty Area',
+    'marking.line.corner': 'Corner Circle',
+    'marking.line.goal': 'Goal Area',
+    'marking.progress': 'Progress',
+    'marking.complete': 'Complete Line',
+    'marking.reset': 'Reset Marking',
+    
+    // Settings
+    'settings.language': 'Language',
+    'settings.spanish': 'Spanish',
+    'settings.dutch': 'Dutch',
+    'settings.english': 'English',
+    
+    // Status
+    'status.online': 'Online',
+    'status.offline': 'Offline',
+    'status.connecting': 'Connecting...',
+    'status.active': 'Active',
+    'status.inactive': 'Inactive',
+    'status.measuring': 'Measuring...',
+    'status.marking': 'Marking...',
+    
+    // General buttons
+    'btn.start': 'Start',
+    'btn.stop': 'Stop',
+    'btn.continue': 'Continue',
+    'btn.complete': 'Complete',
+    'btn.cancel': 'Cancel',
+    'btn.save': 'Save',
+    'btn.clear': 'Clear',
+    'btn.reset': 'Reset'
+  }
+}
+
+interface LanguageProviderProps {
+  children: ReactNode
+}
+
+export function LanguageProvider({ children }: LanguageProviderProps) {
+  const [language, setLanguageState] = useState<Language>('es')
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('lissewege-language') as Language
+    if (savedLanguage && ['es', 'nl', 'en'].includes(savedLanguage)) {
+      setLanguageState(savedLanguage)
+    }
+  }, [])
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang)
+    localStorage.setItem('lissewege-language', lang)
+  }
+
+  const t = (key: string): string => {
+    return (translations[language] as any)[key] || key
+  }
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  )
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext)
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider')
+  }
+  return context
+}

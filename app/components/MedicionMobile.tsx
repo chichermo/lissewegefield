@@ -46,6 +46,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   const [error, setError] = useState<string | null>(null)
   const [showFieldSelector, setShowFieldSelector] = useState(false)
   const [isOnline, setIsOnline] = useState(true)
+  const [modoAvanzado, setModoAvanzado] = useState(false)
   
   // Estados de herramientas de cámara
   const [activeTools, setActiveTools] = useState<string[]>([])
@@ -534,7 +535,18 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
       <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-white font-semibold">Controles</h3>
-          <div className={`w-3 h-3 rounded-full ${isMeasuring ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`} />
+          <div className="flex items-center space-x-3">
+            {/* Toggle Modo Avanzado */}
+            <button
+              onClick={() => setModoAvanzado(!modoAvanzado)}
+              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+                modoAvanzado ? 'bg-blue-500 text-white' : 'bg-white/20 text-white/70'
+              }`}
+            >
+              Avanzado
+            </button>
+            <div className={`w-3 h-3 rounded-full ${isMeasuring ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`} />
+          </div>
         </div>
 
         <div className="flex space-x-3">

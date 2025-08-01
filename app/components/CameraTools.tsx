@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Target,
   Move,
@@ -10,6 +10,7 @@ import {
   Settings,
   Minus
 } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface CameraToolsProps {
   isActive: boolean
@@ -28,48 +29,51 @@ interface ToolConfig {
   overlay: boolean
 }
 
-const CAMERA_TOOLS: ToolConfig[] = [
-  {
-    id: 'tracking-point',
-    name: 'Punto de Seguimiento',
-    description: 'Punto central para seguir al caminar',
-    icon: Target,
-    color: 'bg-red-500',
-    overlay: true
-  },
-  {
-    id: 'guide-lines',
-    name: 'Líneas Guía',
-    description: 'Líneas paralelas para mantener rectitud',
-    icon: Minus,
-    color: 'bg-blue-500',
-    overlay: true
-  },
-  {
-    id: 'live-measurement',
-    name: 'Metraje en Vivo',
-    description: 'Medición en tiempo real en pantalla',
-    icon: Ruler,
-    color: 'bg-green-500',
-    overlay: true
-  },
-  {
-    id: 'path-tracker',
-    name: 'Rastreador de Ruta',
-    description: 'Visualizar camino recorrido',
-    icon: Route,
-    color: 'bg-purple-500',
-    overlay: true
-  },
-  {
-    id: 'straightness-checker',
-    name: 'Verificador de Rectitud',
-    description: 'Analizar si la línea está derecha',
-    icon: Move,
-    color: 'bg-yellow-500',
-    overlay: false
-  }
-]
+// Mover CAMERA_TOOLS dentro del componente para acceder a t()
+function getCameraTools(t: (key: string) => string): ToolConfig[] {
+  return [
+    {
+      id: 'tracking-point',
+      name: t('camera.tracking'),
+      description: t('camera.tracking.desc'),
+      icon: Target,
+      color: 'bg-red-500',
+      overlay: true
+    },
+    {
+      id: 'guide-lines',
+      name: t('camera.guidelines'),
+      description: t('camera.guidelines.desc'),
+      icon: Minus,
+      color: 'bg-blue-500',
+      overlay: true
+    },
+    {
+      id: 'live-measurement',
+      name: t('camera.measurement'),
+      description: t('camera.measurement.desc'),
+      icon: Ruler,
+      color: 'bg-green-500',
+      overlay: true
+    },
+    {
+      id: 'path-tracker',
+      name: t('camera.tracker'),
+      description: t('camera.tracker.desc'),
+      icon: Route,
+      color: 'bg-purple-500',
+      overlay: true
+    },
+    {
+      id: 'straightness-checker',
+      name: t('camera.straightness'),
+      description: t('camera.straightness.desc'),
+      icon: Move,
+      color: 'bg-yellow-500',
+      overlay: false
+    }
+  ]
+}
 
 export default function CameraTools({ 
   isActive, 
@@ -78,11 +82,15 @@ export default function CameraTools({
   onMeasurementUpdate,
   walkingPath 
 }: CameraToolsProps) {
+  const { t } = useLanguage()
   const [showSettings, setShowSettings] = useState(false)
   const [guideLineWidth, setGuideLineWidth] = useState(15) // centímetros
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
   const [isClient, setIsClient] = useState(false)
   const pathCanvasRef = useRef<HTMLCanvasElement>(null)
+
+  // Obtener herramientas con traducciones
+  const CAMERA_TOOLS = getCameraTools(t)
 
   // Detectar lado del cliente para evitar errores de hidratación
   useEffect(() => {
@@ -255,7 +263,7 @@ export default function CameraTools({
         {/* Medición en vivo */}
         {activTools.includes('live-measurement') && walkingPath.length > 1 && (
           <div className="absolute top-4 left-4 bg-green-500/90 text-white px-4 py-2 rounded-lg">
-            <div className="text-xs opacity-80">Distancia recorrida</div>
+            <div className="text-xs opacity-80">{t('camera.distance')}</div>
             <div className="text-lg font-bold">
               {walkingPath.reduce((total, point, index) => {
                 if (index === 0) return 0
@@ -284,7 +292,7 @@ export default function CameraTools({
         {/* Verificador de rectitud */}
         {activTools.includes('straightness-checker') && walkingPath.length > 2 && (
           <div className="absolute top-4 right-4 bg-yellow-500/90 text-white px-4 py-2 rounded-lg">
-            <div className="text-xs opacity-80">Rectitud</div>
+            <div className="text-xs opacity-80">{t('camera.rectitude')}</div>
             <div className="text-lg font-bold flex items-center">
               {straightness.toFixed(1)}%
               <div className={`ml-2 w-3 h-3 rounded-full ${
@@ -296,27 +304,34 @@ export default function CameraTools({
         )}
       </div>
 
-      {/* Panel de control de herramientas */}
-      <div className="absolute bottom-20 left-4 right-4 pointer-events-auto">
+      {/* Panel de control de herramientas - Flotante y colapsable */}
+      <div className="absolute top-4 left-4 pointer-events-auto max-w-xs">
         <motion.div
-          className="bg-black/80 backdrop-blur-sm rounded-2xl p-4 border border-white/20"
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          className={`bg-black/70 backdrop-blur-sm rounded-2xl border border-white/20 transition-all duration-300 ${
+            showSettings ? 'p-4' : 'p-2'
+          }`}
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          {/* Header del panel */}
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-white font-semibold">Herramientas de Cámara</h3>
+          {/* Header del panel - Siempre visible */}
+          <div className="flex items-center justify-between">
+            <h3 className={`text-white font-semibold text-sm ${!showSettings && 'hidden'}`}>
+              {t('camera.tools')}
+            </h3>
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="p-2 bg-white/10 rounded-lg"
+              className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
+              title={showSettings ? 'Contraer' : 'Expandir'}
             >
               {isClient && <Settings className="w-4 h-4 text-white" />}
             </button>
           </div>
 
-          {/* Herramientas */}
-          <div className="grid grid-cols-2 gap-2 mb-3">
+          {/* Herramientas - Solo visibles cuando expandido */}
+          {showSettings && (
+            <div className="mt-3">
+              <div className="grid grid-cols-1 gap-2 mb-3">
             {CAMERA_TOOLS.map((tool) => (
               <button
                 key={tool.id}
@@ -334,21 +349,14 @@ export default function CameraTools({
                 <div className="text-xs text-white/70 mt-1">{tool.description}</div>
               </button>
             ))}
-          </div>
+              </div>
 
-          {/* Configuraciones */}
-          <AnimatePresence>
-            {showSettings && (
-              <motion.div
-                className="bg-white/5 rounded-xl p-3 border-t border-white/10"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-              >
+              {/* Configuraciones */}
+              <div className="bg-white/5 rounded-xl p-3 border-t border-white/10 mt-2">
                 <div className="space-y-3">
                   <div>
                     <label className="text-white text-sm mb-1 block">
-                      Ancho líneas guía: {guideLineWidth}cm
+                      {t('camera.width')}: {guideLineWidth}cm
                     </label>
                     <input
                       type="range"
@@ -360,9 +368,9 @@ export default function CameraTools({
                     />
                   </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
