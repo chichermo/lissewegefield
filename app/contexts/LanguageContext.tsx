@@ -99,6 +99,8 @@ const translations = {
     'measurement.web.start.pro': 'Iniciar Medición Pro',
     'measurement.web.activate.camera': 'Activar Cámara',
     'measurement.web.stop.camera': 'Detener Cámara',
+    'measurement.length.total': 'Longitud Total',
+    'measurement.width.total': 'Ancho Total',
     
     // Marcado
     'marking.title': 'Marcado Móvil',
@@ -235,6 +237,8 @@ const translations = {
     'measurement.web.start.pro': 'Start Pro Meting',
     'measurement.web.activate.camera': 'Camera Activeren',
     'measurement.web.stop.camera': 'Camera Stoppen',
+    'measurement.length.total': 'Totale Lengte',
+    'measurement.width.total': 'Totale Breedte',
     
     // Markering
     'marking.title': 'Mobiele Markering',
@@ -371,6 +375,8 @@ const translations = {
     'measurement.web.start.pro': 'Start Pro Measurement',
     'measurement.web.activate.camera': 'Activate Camera',
     'measurement.web.stop.camera': 'Stop Camera',
+    'measurement.length.total': 'Total Length',
+    'measurement.width.total': 'Total Width',
     
     // Marking
     'marking.title': 'Mobile Marking',

@@ -117,11 +117,11 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
   useEffect(() => {
     if (medicionesGlobales.length === 0) {
       const medicionesPredeterminadas: Medicion[] = [
-        { id: '1', nombre: 'Longitud Total', distancia: 0, tolerancia: 0.5, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'linea' },
-        { id: '2', nombre: 'Ancho Total', distancia: 0, tolerancia: 0.5, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'linea' },
-        { id: '3', nombre: 'Área de Penal Norte', distancia: 0, tolerancia: 0.3, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'area' },
-        { id: '4', nombre: 'Área de Penal Sur', distancia: 0, tolerancia: 0.3, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'area' },
-        { id: '5', nombre: 'Círculo Central', distancia: 0, tolerancia: 0.1, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'circulo' }
+        { id: '1', nombre: t('measurement.length.total'), distancia: 0, tolerancia: 0.5, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'linea' },
+        { id: '2', nombre: t('measurement.width.total'), distancia: 0, tolerancia: 0.5, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'linea' },
+            { id: '3', nombre: t('measurement.web.penalty.north'), distancia: 0, tolerancia: 0.3, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'area' },
+    { id: '4', nombre: t('measurement.web.penalty.south'), distancia: 0, tolerancia: 0.3, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'area' },
+    { id: '5', nombre: t('measurement.web.center.circle'), distancia: 0, tolerancia: 0.1, cumpleFIFA: false, fecha: new Date(), timestamp: Date.now(), tipo: 'circulo' }
       ]
       setMedicionesGlobales(medicionesPredeterminadas)
       setMediciones(medicionesPredeterminadas)
