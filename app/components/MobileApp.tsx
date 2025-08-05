@@ -125,78 +125,142 @@ export default function MobileApp({
 
   return (
     <>
-      {/* Header móvil fijo */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-green-600 to-blue-600 p-4 shadow-lg">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-              <Smartphone className="w-5 h-5 text-white" />
-            </div>
+      {/* Header móvil fijo con diseño moderno */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 z-40 modern-card border-b-0 rounded-b-3xl animate-gradient"
+        style={{ background: 'var(--gradient-fifa)' }}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div className="flex items-center justify-between p-6">
+          <motion.div 
+            className="flex items-center space-x-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.div 
+              className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center fifa-glow"
+              whileHover={{ scale: 1.1, rotate: 10 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <Smartphone className="w-6 h-6 text-white icon-fifa" />
+            </motion.div>
             <div>
-              <h1 className="text-white font-bold text-lg">
+              <motion.h1 
+                className="text-white font-bold text-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
                 {isClient ? 'Lissewege Fields' : 'CanchaPro'}
-              </h1>
-              <p className="text-white/80 text-xs">
+              </motion.h1>
+              <motion.p 
+                className="text-white/90 text-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                <span className="fifa-badge mr-2">FIFA</span>
                 {isClient ? (
                   campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')
                 ) : (
                   campoActivo ? `Campo: ${campoActivo.nombre}` : 'Sin campo seleccionado'
                 )}
-              </p>
+              </motion.p>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="flex items-center space-x-2">
+          <motion.div 
+            className="flex items-center space-x-3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             {/* Selector de idiomas */}
             {isClient && (
-              <div className="relative z-50">
+              <motion.div 
+                className="relative z-50"
+                whileHover={{ scale: 1.05 }}
+              >
                 <LanguageSelector variant="compact" position="top-right" />
-              </div>
+              </motion.div>
             )}
             
-            {/* Indicador de conexión */}
-            <div className={`p-2 rounded-lg ${isOnline ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-              {isOnline ? <Wifi className="w-4 h-4 text-green-400" /> : <WifiOff className="w-4 h-4 text-red-400" />}
-            </div>
+            {/* Indicador de conexión moderno */}
+            <motion.div 
+              className={`p-3 rounded-xl backdrop-blur-md ${isOnline ? 'bg-green-500/30 border border-green-500/50' : 'bg-red-500/30 border border-red-500/50'}`}
+              whileHover={{ scale: 1.1 }}
+              animate={isOnline ? { 
+                boxShadow: "0 0 20px rgba(34, 197, 94, 0.4)",
+                borderColor: "rgba(34, 197, 94, 0.6)"
+              } : {}}
+            >
+              {isOnline ? <Wifi className="w-5 h-5 text-white" /> : <WifiOff className="w-5 h-5 text-white" />}
+            </motion.div>
             
-            {/* Botón de menú */}
+            {/* Botón de menú moderno */}
             <motion.button
               onClick={() => setIsMenuOpen(true)}
-              className="p-2 bg-white/20 rounded-lg text-white"
+              className="p-3 bg-white/20 rounded-xl text-white backdrop-blur-md border border-white/30 hover:bg-white/30 transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Menu className="w-5 h-5" />
             </motion.button>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Contenido principal con padding para header */}
       <div className="pt-24 pb-20 px-4">
-        {/* Sección actual */}
-        <div className="mb-6">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-            <div className="flex items-center space-x-3">
+        {/* Sección actual con diseño moderno */}
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="modern-card animate-slide-up p-6">
+            <div className="flex items-center space-x-4">
               {(() => {
                 const currentItem = navItems.find(item => item.id === activeSection)
                 if (!currentItem) return null
                 
                 return (
                   <>
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${currentItem.color}`}>
-                      <currentItem.icon className="w-6 h-6 text-white" />
-                    </div>
+                    <motion.div 
+                      className={`w-16 h-16 rounded-2xl flex items-center justify-center ${currentItem.color} icon-fifa animate-float`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <currentItem.icon className="w-8 h-8 text-white" />
+                    </motion.div>
                     <div className="flex-1">
-                      <h2 className="text-white font-bold text-xl">{currentItem.label}</h2>
-                      <p className="text-white/70 text-sm">{currentItem.description}</p>
+                      <motion.h2 
+                        className="text-white font-bold text-2xl text-gradient mb-1"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        {currentItem.label}
+                      </motion.h2>
+                      <motion.p 
+                        className="text-white/80 text-base leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        {currentItem.description}
+                      </motion.p>
                     </div>
                   </>
                 )
               })()}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Controles de acción rápida */}
         {activeSection === 'marcado' || activeSection === 'medicion' ? (

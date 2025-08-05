@@ -86,22 +86,47 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+      {/* Header moderno */}
+      <motion.div 
+        className="modern-card animate-fade-scale p-8"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            {isClient && <Trophy className="w-8 h-8 text-white" />}
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">{t('home.title')}</h1>
-          <p className="text-blue-200 text-sm font-medium mb-1">R.F.C. Lissewege - 4718</p>
-          <p className="text-white/60 text-xs">
-            Pol Dhondtstraat 70, 8380 Lissewege, Brugge
-          </p>
-          <p className="text-white/50 text-xs mt-2">
-            {t('home.subtitle')}
-          </p>
+          <motion.div 
+            className="w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl flex items-center justify-center mx-auto mb-6 fifa-glow animate-float"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            {isClient && <Trophy className="w-10 h-10 text-white icon-fifa" />}
+          </motion.div>
+          <motion.h1 
+            className="text-3xl font-bold text-white mb-3 text-gradient"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            {t('home.title')}
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="text-blue-200 text-base font-medium mb-2 flex items-center justify-center">
+              <span className="fifa-badge mr-3">RFC</span>
+              R.F.C. Lissewege - 4718
+            </p>
+            <p className="text-white/70 text-sm mb-3">
+              📍 Pol Dhondtstraat 70, 8380 Lissewege, Brugge
+            </p>
+            <p className="text-white/60 text-base leading-relaxed">
+              {t('home.subtitle')}
+            </p>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Campo activo */}
       {campoActivo && (
@@ -139,31 +164,54 @@ export default function HomeMobile({ onNavigate }: HomeMobileProps) {
         ))}
       </div>
 
-      {/* Acciones rápidas */}
-      <div className="space-y-3">
-        <h2 className="text-white font-semibold text-lg">Acciones Rápidas</h2>
-        {quickActions.map((action, index) => (
-          <motion.button
-            key={action.id}
-            onClick={() => onNavigate(action.id)}
-            className="w-full bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 text-left transition-all hover:bg-white/20 active:scale-95"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="flex items-center space-x-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r ${action.gradient}`}>
-                {isClient && <action.icon className="w-6 h-6 text-white" />}
+      {/* Acciones rápidas modernas */}
+      <div className="space-y-4">
+        <motion.h2 
+          className="text-white font-bold text-xl text-gradient"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8 }}
+        >
+          ⚡ Acciones Rápidas
+        </motion.h2>
+        <div className="grid gap-4">
+          {quickActions.map((action, index) => (
+            <motion.button
+              key={action.id}
+              onClick={() => onNavigate(action.id)}
+              className="modern-card p-6 text-left group hover:border-white/20 transition-all duration-300"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: (index * 0.15) + 1 }}
+              whileHover={{ scale: 1.02, y: -4 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="flex items-center space-x-5">
+                <motion.div 
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r ${action.gradient} fifa-glow`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {isClient && <action.icon className="w-8 h-8 text-white icon-fifa" />}
+                </motion.div>
+                <div className="flex-1">
+                  <h3 className="text-white font-bold text-lg mb-1 group-hover:text-gradient transition-all">
+                    {action.label}
+                  </h3>
+                  <p className="text-white/80 text-base leading-relaxed">
+                    {action.description}
+                  </p>
+                </div>
+                <motion.div
+                  className="text-white/50 group-hover:text-white/80 transition-colors"
+                  whileHover={{ x: 5 }}
+                >
+                  →
+                </motion.div>
               </div>
-              <div className="flex-1">
-                <h3 className="text-white font-semibold">{action.label}</h3>
-                <p className="text-white/70 text-sm">{action.description}</p>
-              </div>
-            </div>
-          </motion.button>
-        ))}
+            </motion.button>
+          ))}
+        </div>
       </div>
 
       {/* Características destacadas */}
