@@ -100,33 +100,33 @@ export default function GestionProductos() {
   const [tareas, setTareas] = useState<Tarea[]>([
     {
       id: 1,
-      titulo: 'Marcado de líneas',
-      descripcion: 'Renovar líneas de la cancha principal con pintura profesional FIFA',
+      titulo: t('tasks.line.marking.title'),
+      descripcion: t('tasks.line.marking.desc'),
       fecha: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       prioridad: 'alta',
       estado: 'pendiente',
-      responsable: 'Juan Pérez',
-      categoria: 'Mantenimiento'
+      responsable: 'Jan Peters',
+      categoria: t('tasks.category.maintenance')
     },
     {
       id: 2,
-      titulo: 'Revisión de porterías',
-      descripcion: 'Verificar estado y ajustar redes de porterías según estándares FIFA',
+      titulo: t('tasks.goal.inspection.title'),
+      descripcion: t('tasks.goal.inspection.desc'),
       fecha: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       prioridad: 'media',
       estado: 'en_progreso',
-      responsable: 'María García',
-      categoria: 'Equipamiento'
+      responsable: 'Maria Garcia',
+      categoria: t('tasks.category.equipment')
     },
     {
       id: 3,
-      titulo: 'Fertilización del césped',
-      descripcion: 'Aplicar fertilizante NPK para optimizar crecimiento del pasto',
+      titulo: t('tasks.grass.fertilization.title'),
+      descripcion: t('tasks.grass.fertilization.desc'),
       fecha: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
       prioridad: 'baja',
       estado: 'pendiente',
-      responsable: 'Carlos López',
-      categoria: 'Mantenimiento'
+      responsable: 'Carlos Lopez',
+      categoria: t('tasks.category.maintenance')
     }
   ])
 
@@ -471,10 +471,10 @@ export default function GestionProductos() {
               onChange={(e) => setFiltroEstado(e.target.value)}
               className="futbol-input"
             >
-              <option value="">📊 Todos los Estados</option>
-              <option value="disponible">✅ Disponible</option>
-              <option value="bajo_stock">⚠️ Bajo Stock</option>
-              <option value="agotado">❌ Agotado</option>
+              <option value="">📊 {t('filters.all.status')}</option>
+              <option value="disponible">✅ {t('filters.status.available')}</option>
+              <option value="bajo_stock">⚠️ {t('filters.status.low.stock')}</option>
+              <option value="agotado">❌ {t('filters.status.out.of.stock')}</option>
             </select>
           </div>
         </div>
@@ -588,10 +588,10 @@ export default function GestionProductos() {
             onChange={(e) => setFiltroTareaEstado(e.target.value)}
             className="futbol-select"
           >
-            <option value="">Todos los estados</option>
-            <option value="pendiente">Pendiente</option>
-            <option value="en_progreso">En Progreso</option>
-            <option value="completada">Completada</option>
+            <option value="">{t('filters.all.status')}</option>
+            <option value="pendiente">{t('filters.tasks.status.pending')}</option>
+            <option value="en_progreso">{t('filters.tasks.status.in.progress')}</option>
+            <option value="completada">{t('filters.tasks.status.completed')}</option>
           </select>
 
           <select
@@ -599,10 +599,10 @@ export default function GestionProductos() {
             onChange={(e) => setFiltroTareaPrioridad(e.target.value)}
             className="futbol-select"
           >
-            <option value="">Todas las prioridades</option>
-            <option value="alta">Alta</option>
-            <option value="media">Media</option>
-            <option value="baja">Baja</option>
+            <option value="">{t('filters.all.priorities')}</option>
+            <option value="alta">{t('filters.priority.high')}</option>
+            <option value="media">{t('filters.priority.medium')}</option>
+            <option value="baja">{t('filters.priority.low')}</option>
           </select>
         </div>
 

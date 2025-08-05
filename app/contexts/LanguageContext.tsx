@@ -443,6 +443,29 @@ const translations = {
     'products.examples.npk.fertilizer.name': 'Fertilizante NPK',
     'products.examples.npk.fertilizer.desc': 'Fertilizante balanceado para mantenimiento del pasto',
     
+    // Tareas
+    'tasks.line.marking.title': 'Marcado de líneas',
+    'tasks.line.marking.desc': 'Renovar líneas de la cancha principal con pintura profesional FIFA',
+    'tasks.goal.inspection.title': 'Revisión de porterías',
+    'tasks.goal.inspection.desc': 'Verificar estado y ajustar redes de porterías según estándares FIFA',
+    'tasks.grass.fertilization.title': 'Fertilización del césped',
+    'tasks.grass.fertilization.desc': 'Aplicar fertilizante NPK para optimizar crecimiento del pasto',
+    'tasks.category.maintenance': 'Mantenimiento',
+    'tasks.category.equipment': 'Equipamiento',
+    
+    // Filtros
+    'filters.all.status': 'Todos los Estados',
+    'filters.all.priorities': 'Todas las Prioridades',
+    'filters.status.available': 'Disponible',
+    'filters.status.low.stock': 'Bajo Stock',
+    'filters.status.out.of.stock': 'Agotado',
+    'filters.tasks.status.pending': 'Pendiente',
+    'filters.tasks.status.in.progress': 'En Progreso',
+    'filters.tasks.status.completed': 'Completada',
+    'filters.priority.high': 'Alta',
+    'filters.priority.medium': 'Media',
+    'filters.priority.low': 'Baja',
+    
     // Meses
     'month.january': 'Enero',
     'month.february': 'Febrero',
@@ -806,6 +829,29 @@ const translations = {
     'products.examples.npk.fertilizer.name': 'NPK Meststof',
     'products.examples.npk.fertilizer.desc': 'Gebalanceerde meststof voor grasonderhoud',
     
+    // Taken
+    'tasks.line.marking.title': 'Lijnen markering',
+    'tasks.line.marking.desc': 'Vernieuw de lijnen van het hoofdveld met professionele FIFA verf',
+    'tasks.goal.inspection.title': 'Doelen inspectie',
+    'tasks.goal.inspection.desc': 'Controleer staat en stel doelnetten bij volgens FIFA-standaarden',
+    'tasks.grass.fertilization.title': 'Gras bemesting',
+    'tasks.grass.fertilization.desc': 'NPK-meststof toepassen voor optimale grasgroei',
+    'tasks.category.maintenance': 'Onderhoud',
+    'tasks.category.equipment': 'Uitrusting',
+    
+    // Filters
+    'filters.all.status': 'Alle Staten',
+    'filters.all.priorities': 'Alle Prioriteiten',
+    'filters.status.available': 'Beschikbaar',
+    'filters.status.low.stock': 'Lage Voorraad',
+    'filters.status.out.of.stock': 'Uitverkocht',
+    'filters.tasks.status.pending': 'In Afwachting',
+    'filters.tasks.status.in.progress': 'In Uitvoering',
+    'filters.tasks.status.completed': 'Voltooid',
+    'filters.priority.high': 'Hoog',
+    'filters.priority.medium': 'Gemiddeld',
+    'filters.priority.low': 'Laag',
+    
     // Maanden
     'month.january': 'Januari',
     'month.february': 'Februari',
@@ -1120,6 +1166,29 @@ const translations = {
     'products.examples.synthetic.grass.desc': 'High-quality synthetic grass for professional fields',
     'products.examples.npk.fertilizer.name': 'NPK Fertilizer',
     'products.examples.npk.fertilizer.desc': 'Balanced fertilizer for grass maintenance',
+    
+    // Tasks
+    'tasks.line.marking.title': 'Line marking',
+    'tasks.line.marking.desc': 'Renew main field lines with professional FIFA paint',
+    'tasks.goal.inspection.title': 'Goal inspection',
+    'tasks.goal.inspection.desc': 'Check condition and adjust goal nets according to FIFA standards',
+    'tasks.grass.fertilization.title': 'Grass fertilization',
+    'tasks.grass.fertilization.desc': 'Apply NPK fertilizer for optimal grass growth',
+    'tasks.category.maintenance': 'Maintenance',
+    'tasks.category.equipment': 'Equipment',
+    
+    // Filters
+    'filters.all.status': 'All Status',
+    'filters.all.priorities': 'All Priorities',
+    'filters.status.available': 'Available',
+    'filters.status.low.stock': 'Low Stock',
+    'filters.status.out.of.stock': 'Out of Stock',
+    'filters.tasks.status.pending': 'Pending',
+    'filters.tasks.status.in.progress': 'In Progress',
+    'filters.tasks.status.completed': 'Completed',
+    'filters.priority.high': 'High',
+    'filters.priority.medium': 'Medium',
+    'filters.priority.low': 'Low',
     
     // Months
     'month.january': 'January',
