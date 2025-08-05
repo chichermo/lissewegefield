@@ -33,33 +33,33 @@ export default function CalendarioMarcado() {
   const [eventos, setEventos] = useState<EventoMarcado[]>([
     {
       id: '1',
-      titulo: 'Marcado de líneas FIFA',
-      descripcion: 'Renovar líneas de la cancha principal con pintura profesional según estándares FIFA',
+      titulo: t('calendar.events.fifa.marking.title'),
+      descripcion: t('calendar.events.fifa.marking.desc'),
       fecha: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
       hora: '09:00',
       tipo: 'marcado',
       estado: 'pendiente',
-      responsable: 'Juan Pérez'
+      responsable: 'Jan Peters'
     },
     {
       id: '2',
-      titulo: 'Fertilización avanzada',
-      descripcion: 'Aplicar fertilizante NPK de alta calidad para optimizar crecimiento del pasto',
+      titulo: t('calendar.events.maintenance.fertilization.title'),
+      descripcion: t('calendar.events.maintenance.fertilization.desc'),
       fecha: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
       hora: '14:00',
       tipo: 'mantenimiento',
       estado: 'en_progreso',
-      responsable: 'María García'
+      responsable: 'Maria Garcia'
     },
     {
       id: '3',
-      titulo: 'Revisión de porterías FIFA',
-      descripcion: 'Verificar estado de redes y postes según estándares FIFA profesionales',
+      titulo: t('calendar.events.inspection.goals.title'),
+      descripcion: t('calendar.events.inspection.goals.desc'),
       fecha: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] || '',
       hora: '16:00',
       tipo: 'revision',
       estado: 'completado',
-      responsable: 'Carlos López'
+      responsable: 'Carlos Lopez'
     }
   ])
 

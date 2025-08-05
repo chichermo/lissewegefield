@@ -32,60 +32,60 @@ export default function GestionProductos() {
   const [productos, setProductos] = useState<Producto[]>([
     {
       id: 1,
-      nombre: 'Pintura para Líneas',
-      categoria: 'Pintura',
+      nombre: t('products.examples.line.paint.name'),
+      categoria: t('products.category.marking'),
       stock: 15,
       precio: 45.99,
       unidad: 'litros',
-      proveedor: 'Pinturas Pro',
+      proveedor: 'Paints Pro',
       fechaVencimiento: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
       estado: 'disponible',
       prioridad: 'alta',
-      descripcion: 'Pintura blanca de alta durabilidad para líneas de cancha'
+      descripcion: t('products.examples.line.paint.desc')
     },
     {
       id: 2,
-      nombre: 'Red de Portería',
-      categoria: 'Equipamiento',
+      nombre: t('products.examples.goal.net.name'),
+      categoria: t('products.category.equipment'),
       stock: 8,
       precio: 89.99,
       unidad: 'unidades',
-      proveedor: 'Deportes Max',
+      proveedor: 'Sports Max',
       fechaVencimiento: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000),
       estado: 'disponible',
       prioridad: 'media',
-      descripcion: 'Red de nylon resistente para porterías reglamentarias'
+      descripcion: t('products.examples.goal.net.desc')
     },
     {
       id: 3,
-      nombre: 'Pelotas Oficiales',
-      categoria: 'Pelotas',
+      nombre: t('products.examples.official.balls.name'),
+      categoria: t('products.category.equipment'),
       stock: 25,
       precio: 29.99,
       unidad: 'unidades',
-      proveedor: 'Fútbol Elite',
+      proveedor: 'Football Elite',
       fechaVencimiento: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000),
       estado: 'disponible',
       prioridad: 'alta',
-      descripcion: 'Pelotas oficiales FIFA para entrenamiento y partidos'
+      descripcion: t('products.examples.official.balls.desc')
     },
     {
       id: 4,
-      nombre: 'Césped Sintético',
-      categoria: 'Superficie',
+      nombre: t('products.examples.synthetic.grass.name'),
+      categoria: t('products.category.maintenance'),
       stock: 5,
       precio: 299.99,
       unidad: 'm²',
-      proveedor: 'Césped Premium',
+      proveedor: 'Premium Grass',
       fechaVencimiento: new Date(Date.now() + 1095 * 24 * 60 * 60 * 1000),
       estado: 'bajo_stock',
       prioridad: 'alta',
-      descripcion: 'Césped sintético de alta calidad para canchas profesionales'
+      descripcion: t('products.examples.synthetic.grass.desc')
     },
     {
       id: 5,
-      nombre: 'Fertilizante NPK',
-      categoria: 'Fertilizantes',
+      nombre: t('products.examples.npk.fertilizer.name'),
+      categoria: t('products.category.maintenance'),
       stock: 12,
       precio: 35.50,
       unidad: 'kg',
@@ -93,7 +93,7 @@ export default function GestionProductos() {
       fechaVencimiento: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000),
       estado: 'disponible',
       prioridad: 'baja',
-      descripcion: 'Fertilizante balanceado para mantenimiento del pasto'
+      descripcion: t('products.examples.npk.fertilizer.desc')
     }
   ])
 

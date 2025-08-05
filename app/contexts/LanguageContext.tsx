@@ -370,6 +370,14 @@ const translations = {
     'calendar.responsible': 'Responsables',
     'calendar.scheduled.events': 'Eventos Programados',
     
+    // Eventos específicos del calendario
+    'calendar.events.fifa.marking.title': 'Marcado de líneas FIFA',
+    'calendar.events.fifa.marking.desc': 'Renovar líneas de la cancha principal con pintura profesional según estándares FIFA',
+    'calendar.events.maintenance.fertilization.title': 'Fertilización avanzada',
+    'calendar.events.maintenance.fertilization.desc': 'Aplicar fertilizante NPK de alta calidad para optimizar crecimiento del pasto',
+    'calendar.events.inspection.goals.title': 'Revisión de porterías FIFA',
+    'calendar.events.inspection.goals.desc': 'Verificar estado de redes y postes según estándares FIFA profesionales',
+    
     // Productos
     'products.title': 'Gestión de Productos Pro',
     'products.subtitle': 'Sistema profesional de inventario y gestión de productos FIFA',
@@ -422,6 +430,18 @@ const translations = {
     'products.low.stock': 'Bajo Stock',
     'products.fifa.standards': 'Estándares FIFA',
     'products.inventory.status': 'Estado del Inventario',
+    
+    // Ejemplos de productos
+    'products.examples.line.paint.name': 'Pintura para Líneas',
+    'products.examples.line.paint.desc': 'Pintura blanca de alta durabilidad para líneas de cancha',
+    'products.examples.goal.net.name': 'Red de Portería',
+    'products.examples.goal.net.desc': 'Red de nylon resistente para porterías reglamentarias',
+    'products.examples.official.balls.name': 'Pelotas Oficiales',
+    'products.examples.official.balls.desc': 'Pelotas oficiales FIFA para entrenamiento y partidos',
+    'products.examples.synthetic.grass.name': 'Césped Sintético',
+    'products.examples.synthetic.grass.desc': 'Césped sintético de alta calidad para canchas profesionales',
+    'products.examples.npk.fertilizer.name': 'Fertilizante NPK',
+    'products.examples.npk.fertilizer.desc': 'Fertilizante balanceado para mantenimiento del pasto',
     
     // Meses
     'month.january': 'Enero',
@@ -713,6 +733,14 @@ const translations = {
     'calendar.responsible': 'Verantwoordelijken',
     'calendar.scheduled.events': 'Geplande Evenementen',
     
+    // Specifieke kalender evenementen
+    'calendar.events.fifa.marking.title': 'FIFA lijnen markering',
+    'calendar.events.fifa.marking.desc': 'Hernieuw de lijnen van het hoofdveld met professionele verf volgens FIFA-standaarden',
+    'calendar.events.maintenance.fertilization.title': 'Geavanceerde bemesting',
+    'calendar.events.maintenance.fertilization.desc': 'NPK-meststof van hoge kwaliteit toepassen voor optimale grasgroei',
+    'calendar.events.inspection.goals.title': 'FIFA doelen inspectie',
+    'calendar.events.inspection.goals.desc': 'Controleer de staat van netten en palen volgens professionele FIFA-standaarden',
+    
     // Producten
     'products.title': 'Productbeheer Pro',
     'products.subtitle': 'Professioneel inventaris- en productbeheersysteem FIFA',
@@ -765,6 +793,18 @@ const translations = {
     'products.low.stock': 'Lage Voorraad',
     'products.fifa.standards': 'FIFA Standaarden',
     'products.inventory.status': 'Voorraadstatus',
+    
+    // Product voorbeelden
+    'products.examples.line.paint.name': 'Lijnverf',
+    'products.examples.line.paint.desc': 'Hoogwaardige witte verf voor veldlijnen',
+    'products.examples.goal.net.name': 'Doelnet',
+    'products.examples.goal.net.desc': 'Sterke nylon net voor reglementaire doelen',
+    'products.examples.official.balls.name': 'Officiële Ballen',
+    'products.examples.official.balls.desc': 'Officiële FIFA ballen voor training en wedstrijden',
+    'products.examples.synthetic.grass.name': 'Kunstgras',
+    'products.examples.synthetic.grass.desc': 'Hoge kwaliteit kunstgras voor professionele velden',
+    'products.examples.npk.fertilizer.name': 'NPK Meststof',
+    'products.examples.npk.fertilizer.desc': 'Gebalanceerde meststof voor grasonderhoud',
     
     // Maanden
     'month.january': 'Januari',
@@ -1008,6 +1048,14 @@ const translations = {
     'calendar.responsible': 'Responsible',
     'calendar.scheduled.events': 'Scheduled Events',
     
+    // Specific calendar events
+    'calendar.events.fifa.marking.title': 'FIFA lines marking',
+    'calendar.events.fifa.marking.desc': 'Renew main field lines with professional paint according to FIFA standards',
+    'calendar.events.maintenance.fertilization.title': 'Advanced fertilization',
+    'calendar.events.maintenance.fertilization.desc': 'Apply high-quality NPK fertilizer to optimize grass growth',
+    'calendar.events.inspection.goals.title': 'FIFA goals inspection',
+    'calendar.events.inspection.goals.desc': 'Check condition of nets and posts according to professional FIFA standards',
+    
     // Products
     'products.title': 'Product Management Pro',
     'products.subtitle': 'Professional inventory and FIFA product management system',
@@ -1060,6 +1108,18 @@ const translations = {
     'products.low.stock': 'Low Stock',
     'products.fifa.standards': 'FIFA Standards',
     'products.inventory.status': 'Inventory Status',
+    
+    // Product examples
+    'products.examples.line.paint.name': 'Line Paint',
+    'products.examples.line.paint.desc': 'High-durability white paint for field lines',
+    'products.examples.goal.net.name': 'Goal Net',
+    'products.examples.goal.net.desc': 'Resistant nylon net for regulation goals',
+    'products.examples.official.balls.name': 'Official Balls',
+    'products.examples.official.balls.desc': 'Official FIFA balls for training and matches',
+    'products.examples.synthetic.grass.name': 'Synthetic Grass',
+    'products.examples.synthetic.grass.desc': 'High-quality synthetic grass for professional fields',
+    'products.examples.npk.fertilizer.name': 'NPK Fertilizer',
+    'products.examples.npk.fertilizer.desc': 'Balanced fertilizer for grass maintenance',
     
     // Months
     'month.january': 'January',
