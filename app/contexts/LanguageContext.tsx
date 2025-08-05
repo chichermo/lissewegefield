@@ -103,6 +103,9 @@ const translations = {
     'measurement.web.stop.camera': 'Detener Cámara',
     'measurement.length.total': 'Longitud Total',
     'measurement.width.total': 'Ancho Total',
+    'measurement.distance.walked': 'Distancia Recorrida',
+    'measurement.recording': 'Grabando...',
+    'measurement.ready': 'Listo',
     
     // Marcado
     'marking.title': 'Marcado Móvil',
@@ -243,6 +246,9 @@ const translations = {
     'measurement.web.stop.camera': 'Camera Stoppen',
     'measurement.length.total': 'Totale Lengte',
     'measurement.width.total': 'Totale Breedte',
+    'measurement.distance.walked': 'Gelopen Afstand',
+    'measurement.recording': 'Opnemen...',
+    'measurement.ready': 'Klaar',
     
     // Markering
     'marking.title': 'Mobiele Markering',
@@ -383,6 +389,9 @@ const translations = {
     'measurement.web.stop.camera': 'Stop Camera',
     'measurement.length.total': 'Total Length',
     'measurement.width.total': 'Total Width',
+    'measurement.distance.walked': 'Distance Walked',
+    'measurement.recording': 'Recording...',
+    'measurement.ready': 'Ready',
     
     // Marking
     'marking.title': 'Mobile Marking',

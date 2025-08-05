@@ -288,6 +288,8 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
     try {
       setIsMeasuring(true)
       setPuntosMedicion([])
+      setTotalDistance(0) // Resetear distancia caminada
+      setWalkingPath([]) // Resetear camino de caminata
       setError(null)
       vibrar(50) // Feedback al iniciar
       
@@ -313,10 +315,22 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
               timestamp: position.timestamp,
               accuracy: position.coords.accuracy
             }
-            setPuntosMedicion(prev => [...prev, nuevoPunto])
+            
+            // Calcular distancia caminada si hay puntos anteriores
+            setPuntosMedicion(prev => {
+              if (prev.length > 0) {
+                const ultimoPunto = prev[prev.length - 1]
+                if (ultimoPunto) {
+                  const distanciaRecorrida = calcularDistancia(ultimoPunto, nuevoPunto)
+                  setTotalDistance(prevTotal => prevTotal + distanciaRecorrida)
+                }
+              }
+              return [...prev, nuevoPunto]
+            })
+            
             setCurrentPosition(nuevoPunto)
             
-            // Actualizar mensaje con precisión actual
+            // Actualizar mensaje con precisión y distancia
             setMensaje(`GPS activo. Precisión: ${position.coords.accuracy.toFixed(1)}m - ${puntosMedicion.length + 1} puntos`)
           },
           (error) => {
@@ -413,6 +427,8 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
 
   const reiniciarMedicion = () => {
     setPuntosMedicion([])
+    setTotalDistance(0) // Resetear distancia caminada
+    setWalkingPath([]) // Resetear camino de caminata
     setMediciones(mediciones.map(m => ({ ...m, distancia: 0, cumpleFIFA: false })))
     setMensaje(t('measurement.reset'))
   }
@@ -586,14 +602,16 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
           <div className="flex items-center space-x-2 mb-2">
             <div className={`w-2 h-2 rounded-full ${isMeasuring ? 'bg-green-500' : 'bg-gray-400'}`} />
             <span className="text-white text-sm font-medium">
-              {isMeasuring ? 'Grabando...' : 'Listo'}
+              {isMeasuring ? t('measurement.recording') : t('measurement.ready')}
             </span>
           </div>
           <p className="text-white/70 text-xs">{mensaje}</p>
-          {totalDistance > 0 && (
-            <div className="flex items-center space-x-2 mt-2 text-blue-400 text-xs">
-              <Target className="w-3 h-3" />
-              <span>Distancia: {totalDistance.toFixed(2)}m</span>
+          {isMeasuring && (
+            <div className="flex items-center space-x-2 mt-2 p-2 bg-blue-600/20 rounded-lg border border-blue-500/30">
+              <Target className="w-4 h-4 text-blue-400" />
+              <span className="text-blue-300 text-sm font-medium">
+                {t('measurement.distance.walked')}: {totalDistance.toFixed(2)}m
+              </span>
             </div>
           )}
           {error && (
