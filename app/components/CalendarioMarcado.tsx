@@ -25,9 +25,11 @@ import {
     Zap
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import { EventoMarcado } from '../../types'
 
 export default function CalendarioMarcado() {
+  const { t } = useLanguage()
   const [eventos, setEventos] = useState<EventoMarcado[]>([
     {
       id: '1',
@@ -250,10 +252,14 @@ export default function CalendarioMarcado() {
 
   const diasMes = obtenerDiasMes(mesActual)
   const nombresMeses = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    t('month.january'), t('month.february'), t('month.march'), t('month.april'), 
+    t('month.may'), t('month.june'), t('month.july'), t('month.august'),
+    t('month.september'), t('month.october'), t('month.november'), t('month.december')
   ]
-  const nombresDias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+  const nombresDias = [
+    t('day.short.sunday'), t('day.short.monday'), t('day.short.tuesday'), 
+    t('day.short.wednesday'), t('day.short.thursday'), t('day.short.friday'), t('day.short.saturday')
+  ]
 
   return (
     <div className="space-y-6">
@@ -272,23 +278,23 @@ export default function CalendarioMarcado() {
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gradient">Calendario de Marcado Pro</h2>
-              <p className="text-white/70">Sistema profesional de programación y gestión de tareas FIFA</p>
+              <h2 className="text-2xl font-bold text-gradient">{t('calendar.title')}</h2>
+              <p className="text-white/70">{t('calendar.subtitle')}</p>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="futbol-indicator success">
               <CalendarDays className="w-4 h-4" />
-              <span>{eventos.length} Eventos</span>
+              <span>{eventos.length} {t('calendar.events')}</span>
             </div>
             <div className="futbol-indicator info">
               <Clock4 className="w-4 h-4" />
-              <span>{eventos.filter(e => e.estado === 'pendiente').length} Pendientes</span>
+              <span>{eventos.filter(e => e.estado === 'pendiente').length} {t('calendar.pending')}</span>
             </div>
             <div className="futbol-indicator success">
               <UserCheck className="w-4 h-4" />
-              <span>{new Set(eventos.map(e => e.responsable)).size} Responsables</span>
+              <span>{new Set(eventos.map(e => e.responsable)).size} {t('calendar.responsible')}</span>
             </div>
           </div>
         </div>
@@ -466,7 +472,7 @@ export default function CalendarioMarcado() {
         transition={{ delay: 0.2 }}
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold text-white">Eventos Programados</h3>
+          <h3 className="text-xl font-bold text-white">{t('calendar.scheduled.events')}</h3>
           <motion.button
             onClick={() => {
               agregarEvento({

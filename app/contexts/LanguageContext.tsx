@@ -328,7 +328,8 @@ const translations = {
     'achievement.req.hundred.fields': 'Completar 100 campos',
     
     // Calendario
-    'calendar.title': 'Calendario de Eventos',
+    'calendar.title': 'Calendario de Marcado Pro',
+    'calendar.subtitle': 'Sistema profesional de programación y gestión de tareas FIFA',
     'calendar.no.events': 'No hay eventos programados',
     'calendar.add.event': 'Agregar Evento',
     'calendar.today': 'Hoy',
@@ -362,6 +363,10 @@ const translations = {
     'calendar.sync': 'Sincronizar',
     'calendar.export': 'Exportar Calendario',
     'calendar.import': 'Importar Eventos',
+    'calendar.events': 'Eventos',
+    'calendar.pending': 'Pendientes',
+    'calendar.responsible': 'Responsables',
+    'calendar.scheduled.events': 'Eventos Programados',
     
     // Productos
     'products.title': 'Gestión de Productos Pro',
@@ -415,6 +420,29 @@ const translations = {
     'products.low.stock': 'Bajo Stock',
     'products.fifa.standards': 'Estándares FIFA',
     'products.inventory.status': 'Estado del Inventario',
+    
+    // Meses
+    'month.january': 'Enero',
+    'month.february': 'Febrero',
+    'month.march': 'Marzo',
+    'month.april': 'Abril',
+    'month.may': 'Mayo',
+    'month.june': 'Junio',
+    'month.july': 'Julio',
+    'month.august': 'Agosto',
+    'month.september': 'Septiembre',
+    'month.october': 'Octubre',
+    'month.november': 'Noviembre',
+    'month.december': 'Diciembre',
+    
+    // Días de la semana (cortos)
+    'day.short.sunday': 'Dom',
+    'day.short.monday': 'Lun',
+    'day.short.tuesday': 'Mar',
+    'day.short.wednesday': 'Mié',
+    'day.short.thursday': 'Jue',
+    'day.short.friday': 'Vie',
+    'day.short.saturday': 'Sáb',
     
     // Marcado
     'marking.title': 'Marcado Móvil',
@@ -641,7 +669,8 @@ const translations = {
     'btn.reset': 'Herstellen',
     
     // Kalender
-    'calendar.title': 'Evenementenkalender',
+    'calendar.title': 'Markering Kalender Pro',
+    'calendar.subtitle': 'Professioneel programmeer- en taakbeheersysteem FIFA',
     'calendar.no.events': 'Geen evenementen gepland',
     'calendar.add.event': 'Evenement Toevoegen',
     'calendar.today': 'Vandaag',
@@ -675,6 +704,10 @@ const translations = {
     'calendar.sync': 'Synchroniseren',
     'calendar.export': 'Kalender Exporteren',
     'calendar.import': 'Evenementen Importeren',
+    'calendar.events': 'Evenementen',
+    'calendar.pending': 'In Afwachting',
+    'calendar.responsible': 'Verantwoordelijken',
+    'calendar.scheduled.events': 'Geplande Evenementen',
     
     // Producten
     'products.title': 'Productbeheer Pro',
@@ -727,7 +760,30 @@ const translations = {
     'products.items': 'Producten',
     'products.low.stock': 'Lage Voorraad',
     'products.fifa.standards': 'FIFA Standaarden',
-    'products.inventory.status': 'Voorraadstatus'
+    'products.inventory.status': 'Voorraadstatus',
+    
+    // Maanden
+    'month.january': 'Januari',
+    'month.february': 'Februari',
+    'month.march': 'Maart',
+    'month.april': 'April',
+    'month.may': 'Mei',
+    'month.june': 'Juni',
+    'month.july': 'Juli',
+    'month.august': 'Augustus',
+    'month.september': 'September',
+    'month.october': 'Oktober',
+    'month.november': 'November',
+    'month.december': 'December',
+    
+    // Dagen van de week (kort)
+    'day.short.sunday': 'Zo',
+    'day.short.monday': 'Ma',
+    'day.short.tuesday': 'Di',
+    'day.short.wednesday': 'Wo',
+    'day.short.thursday': 'Do',
+    'day.short.friday': 'Vr',
+    'day.short.saturday': 'Za'
   },
   
   en: {
@@ -906,7 +962,8 @@ const translations = {
     'btn.reset': 'Reset',
     
     // Calendar
-    'calendar.title': 'Event Calendar',
+    'calendar.title': 'Marking Calendar Pro',
+    'calendar.subtitle': 'Professional programming and FIFA task management system',
     'calendar.no.events': 'No events scheduled',
     'calendar.add.event': 'Add Event',
     'calendar.today': 'Today',
@@ -940,6 +997,10 @@ const translations = {
     'calendar.sync': 'Synchronize',
     'calendar.export': 'Export Calendar',
     'calendar.import': 'Import Events',
+    'calendar.events': 'Events',
+    'calendar.pending': 'Pending',
+    'calendar.responsible': 'Responsible',
+    'calendar.scheduled.events': 'Scheduled Events',
     
     // Products
     'products.title': 'Product Management Pro',
@@ -992,7 +1053,30 @@ const translations = {
     'products.items': 'Products',
     'products.low.stock': 'Low Stock',
     'products.fifa.standards': 'FIFA Standards',
-    'products.inventory.status': 'Inventory Status'
+    'products.inventory.status': 'Inventory Status',
+    
+    // Months
+    'month.january': 'January',
+    'month.february': 'February',
+    'month.march': 'March',
+    'month.april': 'April',
+    'month.may': 'May',
+    'month.june': 'June',
+    'month.july': 'July',
+    'month.august': 'August',
+    'month.september': 'September',
+    'month.october': 'October',
+    'month.november': 'November',
+    'month.december': 'December',
+    
+    // Days of the week (short)
+    'day.short.sunday': 'Sun',
+    'day.short.monday': 'Mon',
+    'day.short.tuesday': 'Tue',
+    'day.short.wednesday': 'Wed',
+    'day.short.thursday': 'Thu',
+    'day.short.friday': 'Fri',
+    'day.short.saturday': 'Sat'
   }
 }
 
