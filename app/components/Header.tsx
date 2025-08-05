@@ -40,7 +40,7 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
             </svg>
           </div>
           <div className="futbol-logo-text">
-            {isClient ? 'Lissewege Fields' : 'Cancha Inteligente'}
+            {isClient ? 'Lissewege Fields' : 'Lissewege Velden'}
           </div>
         </motion.div>
 

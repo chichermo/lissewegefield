@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-export type Language = 'es' | 'nl' | 'en'
+export type Language = 'nl' | 'en' | 'es'
 
 interface LanguageContextType {
   language: Language
@@ -1091,12 +1091,17 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [language, setLanguageState] = useState<Language>('es')
+  // Neerlandés como idioma principal por defecto
+  const [language, setLanguageState] = useState<Language>('nl')
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('lissewege-language') as Language
-    if (savedLanguage && ['es', 'nl', 'en'].includes(savedLanguage)) {
+    if (savedLanguage && ['nl', 'en', 'es'].includes(savedLanguage)) {
       setLanguageState(savedLanguage)
+    } else {
+      // Si no hay idioma guardado, usar neerlandés por defecto
+      setLanguageState('nl')
+      localStorage.setItem('lissewege-language', 'nl')
     }
   }, [])
 

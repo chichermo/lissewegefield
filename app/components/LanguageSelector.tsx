@@ -6,9 +6,9 @@ import { Globe, ChevronDown } from 'lucide-react'
 import { useLanguage, Language } from '../contexts/LanguageContext'
 
 const languages = [
-  { code: 'es' as Language, name: 'Español', flag: '🇪🇸' },
   { code: 'nl' as Language, name: 'Nederlands', flag: '🇳🇱' },
-  { code: 'en' as Language, name: 'English', flag: '🇬🇧' }
+  { code: 'en' as Language, name: 'English', flag: '🇬🇧' },
+  { code: 'es' as Language, name: 'Español', flag: '🇪🇸' }
 ]
 
 interface LanguageSelectorProps {

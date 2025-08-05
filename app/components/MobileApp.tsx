@@ -88,7 +88,7 @@ export default function MobileApp({
     },
     {
       id: 'campos',
-      label: isClient ? t('nav.fields') : 'Campos',
+      label: isClient ? t('nav.fields') : 'Velden',
       icon: Grid3X3,
       color: 'bg-indigo-500',
       description: isClient ? t('home.fields.desc') : 'Gestionar campos'
@@ -154,7 +154,7 @@ export default function MobileApp({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                {isClient ? 'Lissewege Fields' : 'CanchaPro'}
+                {isClient ? 'Lissewege Fields' : 'Lissewege Velden'}
               </motion.h1>
               <motion.p 
                 className="text-white/90 text-sm"
@@ -166,7 +166,7 @@ export default function MobileApp({
                 {isClient ? (
                   campoActivo ? `${t('nav.fields')}: ${campoActivo.nombre}` : t('status.inactive')
                 ) : (
-                  campoActivo ? `Campo: ${campoActivo.nombre}` : 'Sin campo seleccionado'
+                  campoActivo ? `Veld: ${campoActivo.nombre}` : 'Geen veld geselecteerd'
                 )}
               </motion.p>
             </div>
