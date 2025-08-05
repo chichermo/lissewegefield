@@ -19,10 +19,12 @@ import MobileApp from './components/MobileApp'
 import MedicionMobile from './components/MedicionMobile'
 import MarcadoMobile from './components/MarcadoMobile'
 import HomeMobile from './components/HomeMobile'
+import AdvancedModeManager from './components/AdvancedModeManager'
 import { LanguageProvider } from './contexts/LanguageContext'
 
 
-export default function Home() {
+// Componente interno que puede usar el contexto de idioma
+function HomeContent() {
   const [seccionActiva, setSeccionActiva] = useState('inicio')
   const [modoAvanzado, setModoAvanzado] = useState(false)
   const [plantillaSeleccionada, setPlantillaSeleccionada] = useState<any>(null)
@@ -130,7 +132,6 @@ export default function Home() {
   }
 
   return (
-    <LanguageProvider>
       <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
       {/* Versión móvil */}
       <div className="lg:hidden">
@@ -165,27 +166,11 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-white font-medium">Modo Avanzado</span>
-                  <motion.button
-                    onClick={() => setModoAvanzado(!modoAvanzado)}
-                    className={`w-12 h-6 rounded-full transition-colors ${
-                      modoAvanzado ? 'bg-blue-500' : 'bg-white/20'
-                    }`}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <motion.div
-                      className="w-4 h-4 bg-white rounded-full"
-                      animate={{ x: modoAvanzado ? 24 : 2 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    />
-                  </motion.button>
-                </div>
-                {modoAvanzado && (
-                  <p className="text-xs text-white/70 mt-2">
-                    Funciones profesionales habilitadas
-                  </p>
-                )}
+                <AdvancedModeManager
+                  isAdvanced={modoAvanzado}
+                  onToggleMode={setModoAvanzado}
+                  currentComponent={seccionActiva}
+                />
               </motion.div>
             </div>
 
@@ -200,6 +185,14 @@ export default function Home() {
       {/* PWA Installer */}
       <PWAInstaller />
       </div>
+  )
+}
+
+// Componente principal que provee el contexto
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <HomeContent />
     </LanguageProvider>
   )
 }
