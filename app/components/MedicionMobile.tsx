@@ -17,6 +17,8 @@ import { useAppStore } from '../../stores/useAppStore'
 import { Medicion, PuntoGPS } from '../../types'
 import CameraTools from './CameraTools'
 import { useLanguage } from '../contexts/LanguageContext'
+import AdvancedModeManager from './AdvancedModeManager'
+import AILineDetection from './AILineDetection'
 // import MobileNotifications, { useNotifications } from './MobileNotifications'
 
 interface MedicionMobileProps {
@@ -559,15 +561,12 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-white font-semibold">Controles</h3>
           <div className="flex items-center space-x-3">
-            {/* Toggle Modo Avanzado */}
-            <button
-              onClick={() => setModoAvanzado(!modoAvanzado)}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
-                modoAvanzado ? 'bg-blue-500 text-white' : 'bg-white/20 text-white/70'
-              }`}
-            >
-              Avanzado
-            </button>
+            {/* Gestor de Modo Avanzado */}
+            <AdvancedModeManager
+              isAdvanced={modoAvanzado}
+              onToggleMode={setModoAvanzado}
+              currentComponent="measurement"
+            />
             <div className={`w-3 h-3 rounded-full ${isMeasuring ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`} />
           </div>
         </div>
@@ -653,6 +652,21 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
                 onMeasurementUpdate={setTotalDistance}
                 walkingPath={walkingPath}
               />
+              
+              {/* Detección de IA (solo en modo avanzado) */}
+              {modoAvanzado && (
+                <AILineDetection
+                  videoElement={videoRef.current}
+                  isActive={isCameraActive}
+                  onLineDetected={(line) => {
+                    console.log('Línea detectada:', line)
+                    // Aquí se pueden agregar acciones cuando se detecta una línea
+                  }}
+                  onConfidenceChange={(confidence) => {
+                    // Actualizar confianza de IA
+                  }}
+                />
+              )}
             </div>
           ) : (
             <div className="h-48 bg-white/5 rounded-lg flex items-center justify-center">
