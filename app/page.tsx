@@ -30,17 +30,38 @@ function HomeContent() {
   const [plantillaSeleccionada, setPlantillaSeleccionada] = useState<any>(null)
   const [isRecording, setIsRecording] = useState(false)
 
-  // Registrar Service Worker
+  // Registrar Service Worker mejorado
   useEffect(() => {
     if ('serviceWorker' in navigator) {
+      // Registrar con manejo de errores mejorado
       navigator.serviceWorker
-        .register('/sw.js')
+        .register('/sw.js', {
+          scope: '/',
+          updateViaCache: 'none'
+        })
         .then((registration) => {
-          console.log('SW registrado:', registration)
+          console.log('✅ SW registrado exitosamente:', registration.scope)
+          
+          // Manejar actualizaciones
+          registration.addEventListener('updatefound', () => {
+            console.log('🔄 SW: Nueva versión encontrada')
+          })
         })
         .catch((error) => {
-          console.log('SW error:', error)
+          console.warn('⚠️ SW: Error en registro:', error)
         })
+      
+      // Manejar mensajes del Service Worker
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log('📨 Mensaje del SW:', event.data)
+      })
+      
+      // Manejar cambios en el estado del SW
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('🔄 SW: Controlador cambiado')
+      })
+    } else {
+      console.warn('⚠️ Service Workers no soportados en este navegador')
     }
   }, [])
 
