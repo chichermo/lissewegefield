@@ -319,15 +319,15 @@ export default function GestionProductos() {
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span>Calidad:</span>
+                <span>{t('products.stats.quality')}:</span>
                 <span className="text-green-400">{configuracionFIFA.estandaresCalidad}</span>
               </div>
               <div className="flex justify-between">
-                <span>Frecuencia:</span>
+                <span>{t('products.stats.frequency')}:</span>
                 <span className="text-blue-400">{configuracionFIFA.frecuenciaMantenimiento}</span>
               </div>
               <div className="flex justify-between">
-                <span>Proveedores:</span>
+                <span>{t('products.stats.suppliers')}:</span>
                 <span className="text-purple-400">{configuracionFIFA.proveedoresAutorizados.length}</span>
               </div>
             </div>
@@ -344,11 +344,11 @@ export default function GestionProductos() {
                 <span className="text-red-400">{estadisticasAvanzadas.productosBajoStock}</span>
               </div>
               <div className="flex justify-between">
-                <span>Próximos Venc:</span>
+                <span>{t('products.stats.next.expiry')}:</span>
                 <span className="text-orange-400">{estadisticasAvanzadas.proximosVencimientos}</span>
               </div>
               <div className="flex justify-between">
-                <span>Tendencia:</span>
+                <span>{t('products.stats.trend')}:</span>
                 <span className="text-green-400">{estadisticasAvanzadas.tendenciaCompras.toFixed(1)}%</span>
               </div>
             </div>
@@ -357,19 +357,19 @@ export default function GestionProductos() {
           <motion.div className="futbol-card" whileHover={{ scale: 1.02 }}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-purple-400" />
-              Estadísticas Avanzadas
+              {t('products.advanced.statistics')}
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span>Valor Total:</span>
+                <span>{t('products.stats.total.value')}:</span>
                 <span className="text-green-400">${estadisticasAvanzadas.valorTotalInventario.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Proveedores:</span>
+                <span>{t('products.stats.suppliers')}:</span>
                 <span className="text-blue-400">{estadisticasAvanzadas.proveedoresPrincipales}</span>
               </div>
               <div className="flex justify-between">
-                <span>Eficiencia:</span>
+                <span>{t('products.stats.efficiency')}:</span>
                 <span className="text-purple-400">{(estadisticasAvanzadas.tendenciaCompras * 0.8).toFixed(1)}%</span>
               </div>
             </div>
@@ -406,7 +406,7 @@ export default function GestionProductos() {
             whileTap={{ scale: 0.98 }}
           >
             <Plus className="w-5 h-5" />
-            <span>Agregar Producto</span>
+            <span>{t('products.add.product')}</span>
           </motion.button>
         </div>
 
@@ -419,7 +419,7 @@ export default function GestionProductos() {
             whileTap={{ scale: 0.98 }}
           >
             <TrendingUp className="w-5 h-5" />
-            <span>{modoAvanzado ? '📊 Modo Básico' : '⚡ Modo Avanzado'}</span>
+            <span>{modoAvanzado ? t('products.basic.mode') : t('products.advanced.mode')}</span>
           </motion.button>
 
           <motion.button
@@ -429,7 +429,7 @@ export default function GestionProductos() {
             whileTap={{ scale: 0.98 }}
           >
             <Download className="w-5 h-5" />
-            <span>📊 Exportar Inventario</span>
+            <span>{t('products.export.inventory')}</span>
           </motion.button>
 
           <motion.button
@@ -439,7 +439,7 @@ export default function GestionProductos() {
             whileTap={{ scale: 0.98 }}
           >
             <SortAsc className="w-5 h-5" />
-            <span>📦 Ordenar por Nombre</span>
+            <span>{t('products.sort.by.name')}</span>
           </motion.button>
 
           <motion.button
@@ -449,7 +449,7 @@ export default function GestionProductos() {
             whileTap={{ scale: 0.98 }}
           >
             <Receipt className="w-5 h-5" />
-            <span>💰 Ordenar por Precio</span>
+            <span>{t('products.sort.by.price')}</span>
           </motion.button>
 
           <div className="flex items-center space-x-4">
@@ -458,12 +458,12 @@ export default function GestionProductos() {
               onChange={(e) => setFiltroCategoria(e.target.value)}
               className="futbol-input"
             >
-              <option value="">🎯 Todas las Categorías</option>
-              <option value="Pintura">🎨 Pintura</option>
-              <option value="Equipamiento">⚽ Equipamiento</option>
-              <option value="Pelotas">⚽ Pelotas</option>
-              <option value="Superficie">🌱 Superficie</option>
-              <option value="Fertilizantes">🌿 Fertilizantes</option>
+              <option value="">🎯 {t('filters.all.categories')}</option>
+              <option value="Pintura">🎨 {t('products.category.paint')}</option>
+              <option value="Equipamiento">⚽ {t('products.category.equipment')}</option>
+              <option value="Pelotas">⚽ {t('products.category.balls')}</option>
+              <option value="Superficie">🌱 {t('products.category.surface')}</option>
+              <option value="Fertilizantes">🌿 {t('products.category.fertilizers')}</option>
             </select>
 
             <select

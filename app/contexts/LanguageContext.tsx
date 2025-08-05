@@ -466,6 +466,37 @@ const translations = {
     'filters.priority.medium': 'Media',
     'filters.priority.low': 'Baja',
     
+    // Botones y acciones de productos
+    'products.add.product': 'Agregar Producto',
+    'products.basic.mode': '📊 Modo Básico',
+    'products.advanced.mode': '⚡ Modo Avanzado',
+    'products.export.inventory': '📊 Exportar Inventario',
+    'products.sort.by.name': '📦 Ordenar por Nombre',
+    'products.sort.by.price': '💰 Ordenar por Precio',
+    'products.advanced.statistics': 'Estadísticas Avanzadas',
+    
+    // Estadísticas de productos
+    'products.stats.total.value': 'Valor Total',
+    'products.stats.suppliers': 'Proveedores',
+    'products.stats.efficiency': 'Eficiencia',
+    'products.stats.quality': 'Calidad',
+    'products.stats.frequency': 'Frecuencia',
+    'products.stats.next.expiry': 'Próximos Venc',
+    'products.stats.trend': 'Tendencia',
+    
+    // Categorías y filtros adicionales
+    'filters.all.categories': 'Todas las Categorías',
+    'products.category.paint': 'Pintura',
+    'products.category.balls': 'Pelotas',
+    'products.category.surface': 'Superficie',
+    'products.category.fertilizers': 'Fertilizantes',
+    
+    // Datos por defecto
+    'products.new.product.name': 'Nuevo Producto',
+    'products.new.product.category': 'General',
+    'products.new.product.supplier': 'Proveedor',
+    'products.new.product.description': 'Descripción del nuevo producto',
+    
     // Meses
     'month.january': 'Enero',
     'month.february': 'Febrero',
@@ -852,6 +883,37 @@ const translations = {
     'filters.priority.medium': 'Gemiddeld',
     'filters.priority.low': 'Laag',
     
+    // Product knoppen en acties
+    'products.add.product': 'Product Toevoegen',
+    'products.basic.mode': '📊 Basis Modus',
+    'products.advanced.mode': '⚡ Geavanceerde Modus',
+    'products.export.inventory': '📊 Inventaris Exporteren',
+    'products.sort.by.name': '📦 Sorteren op Naam',
+    'products.sort.by.price': '💰 Sorteren op Prijs',
+    'products.advanced.statistics': 'Geavanceerde Statistieken',
+    
+    // Product statistieken
+    'products.stats.total.value': 'Totale Waarde',
+    'products.stats.suppliers': 'Leveranciers',
+    'products.stats.efficiency': 'Efficiëntie',
+    'products.stats.quality': 'Kwaliteit',
+    'products.stats.frequency': 'Frequentie',
+    'products.stats.next.expiry': 'Volgende Verval',
+    'products.stats.trend': 'Trend',
+    
+    // Categorieën en extra filters
+    'filters.all.categories': 'Alle Categorieën',
+    'products.category.paint': 'Verf',
+    'products.category.balls': 'Ballen',
+    'products.category.surface': 'Oppervlak',
+    'products.category.fertilizers': 'Meststoffen',
+    
+    // Standaard gegevens
+    'products.new.product.name': 'Nieuw Product',
+    'products.new.product.category': 'Algemeen',
+    'products.new.product.supplier': 'Leverancier',
+    'products.new.product.description': 'Beschrijving van het nieuwe product',
+    
     // Maanden
     'month.january': 'Januari',
     'month.february': 'Februari',
@@ -1189,6 +1251,37 @@ const translations = {
     'filters.priority.high': 'High',
     'filters.priority.medium': 'Medium',
     'filters.priority.low': 'Low',
+    
+    // Product buttons and actions
+    'products.add.product': 'Add Product',
+    'products.basic.mode': '📊 Basic Mode',
+    'products.advanced.mode': '⚡ Advanced Mode',
+    'products.export.inventory': '📊 Export Inventory',
+    'products.sort.by.name': '📦 Sort by Name',
+    'products.sort.by.price': '💰 Sort by Price',
+    'products.advanced.statistics': 'Advanced Statistics',
+    
+    // Product statistics
+    'products.stats.total.value': 'Total Value',
+    'products.stats.suppliers': 'Suppliers',
+    'products.stats.efficiency': 'Efficiency',
+    'products.stats.quality': 'Quality',
+    'products.stats.frequency': 'Frequency',
+    'products.stats.next.expiry': 'Next Expiry',
+    'products.stats.trend': 'Trend',
+    
+    // Categories and additional filters
+    'filters.all.categories': 'All Categories',
+    'products.category.paint': 'Paint',
+    'products.category.balls': 'Balls',
+    'products.category.surface': 'Surface',
+    'products.category.fertilizers': 'Fertilizers',
+    
+    // Default data
+    'products.new.product.name': 'New Product',
+    'products.new.product.category': 'General',
+    'products.new.product.supplier': 'Supplier',
+    'products.new.product.description': 'Description of the new product',
     
     // Months
     'month.january': 'January',
