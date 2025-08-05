@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '../contexts/LanguageContext'
 import {
   Home,
   MapPin,
@@ -22,59 +23,60 @@ interface NavigationMobileProps {
 
 export default function NavigationMobile({ onNavigate, activeSection }: NavigationMobileProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useLanguage()
 
   const navItems = [
     {
       id: 'inicio',
-      label: 'Inicio',
+      label: t('nav.home'),
       icon: Home,
       color: 'bg-blue-500'
     },
     {
       id: 'marcado',
-      label: 'Marcado',
+      label: t('nav.marking'),
       icon: MapPin,
       color: 'bg-green-500'
     },
     {
       id: 'medicion',
-      label: 'Medición',
+      label: t('nav.measurement'),
       icon: Target,
       color: 'bg-purple-500'
     },
     {
       id: 'campos',
-      label: 'Campos',
+      label: t('nav.fields'),
       icon: Grid3X3,
       color: 'bg-indigo-500'
     },
     {
       id: 'exportador',
-      label: 'Exportar',
+      label: t('nav.export'),
       icon: Download,
       color: 'bg-orange-500'
     },
     {
       id: 'mapa',
-      label: 'Mapa',
+      label: t('nav.map'),
       icon: Globe,
       color: 'bg-teal-500'
     },
     {
       id: 'historial',
-      label: 'Historial',
+      label: t('nav.history'),
       icon: History,
       color: 'bg-yellow-500'
     },
     {
       id: 'calendario',
-      label: 'Calendario',
+      label: t('nav.calendar'),
       icon: Calendar,
       color: 'bg-red-500'
     },
     {
       id: 'productos',
-      label: 'Productos',
+      label: t('nav.products'),
       icon: Package,
       color: 'bg-gray-500'
     }

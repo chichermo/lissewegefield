@@ -22,6 +22,8 @@ const translations = {
     'nav.history': 'Historial',
     'nav.export': 'Exportar',
     'nav.map': 'Mapa',
+    'nav.calendar': 'Calendario',
+    'nav.products': 'Productos',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
@@ -160,6 +162,8 @@ const translations = {
     'nav.history': 'Geschiedenis',
     'nav.export': 'Exporteren',
     'nav.map': 'Kaart',
+    'nav.calendar': 'Kalender',
+    'nav.products': 'Producten',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
@@ -298,6 +302,8 @@ const translations = {
     'nav.history': 'History',
     'nav.export': 'Export',
     'nav.map': 'Map',
+    'nav.calendar': 'Calendar',
+    'nav.products': 'Products',
     
     // Home
     'home.title': 'Lissewege Fields - R.F.C. Lissewege',
