@@ -8,19 +8,15 @@ import {
   Star,
   Award,
   Zap,
-  Timer,
   MapPin,
-  Users,
-  TrendingUp,
   Crown,
   Medal,
   CheckCircle,
   Lock,
   Unlock,
-  Gift,
   Flame,
   Calendar,
-  BarChart3
+  X
 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -61,7 +57,7 @@ interface GamificationSystemProps {
 
 export default function GamificationSystem({
   userStats,
-  onStatsUpdate,
+  onStatsUpdate: _,
   isVisible
 }: GamificationSystemProps) {
   const { t } = useLanguage()

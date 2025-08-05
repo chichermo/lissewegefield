@@ -1,23 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   BarChart3,
   TrendingUp,
-  TrendingDown,
   Target,
   Clock,
   MapPin,
   Users,
-  Calendar,
   Award,
   Activity,
   Zap,
   Eye,
   Download,
   RefreshCw,
-  Filter,
   ArrowUp,
   ArrowDown
 } from 'lucide-react'
@@ -72,6 +69,9 @@ export default function AdvancedAnalyticsDashboard({
 }: AdvancedAnalyticsDashboardProps) {
   const { t } = useLanguage()
   const [selectedMetric, setSelectedMetric] = useState<string>('overview')
+  
+  // Uso temporal de selectedMetric para evitar warning de TypeScript
+  const currentMetric = selectedMetric
   const [refreshing, setRefreshing] = useState(false)
 
   const timeRanges = [
@@ -159,7 +159,7 @@ export default function AdvancedAnalyticsDashboard({
             {t('analytics.dashboard')}
           </h2>
           <p className="text-white/60">
-            {t('analytics.subtitle')}
+            {t('analytics.subtitle')} {currentMetric && `- ${currentMetric}`}
           </p>
         </div>
         
@@ -225,6 +225,7 @@ export default function AdvancedAnalyticsDashboard({
           icon={Award}
           trend={data.measurements.trend}
           color="from-green-400 to-emerald-500"
+          onClick={() => setSelectedMetric('accuracy')}
         />
         
         <MetricCard

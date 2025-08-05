@@ -662,7 +662,7 @@ export default function MedicionMobile({ isRecording, onRecordingChange }: Medic
                     console.log('Línea detectada:', line)
                     // Aquí se pueden agregar acciones cuando se detecta una línea
                   }}
-                  onConfidenceChange={(confidence) => {
+                  onConfidenceChange={(_) => {
                     // Actualizar confianza de IA
                   }}
                 />

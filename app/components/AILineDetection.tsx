@@ -71,10 +71,10 @@ export default function AILineDetection({
     })
   }
 
-  // Simulación del algoritmo de detección de líneas
+    // Simulación del algoritmo de detección de líneas
   const simulateLineDetection = (
-    imageData: ImageData, 
-    width: number, 
+    _imageData: ImageData,
+    width: number,
     height: number
   ): DetectedLine[] => {
     const lines: DetectedLine[] = []
@@ -171,17 +171,22 @@ export default function AILineDetection({
       ctx.lineCap = 'round'
 
       // Dibujar línea
-      if (line.points.length >= 2) {
+      if (line.points.length >= 2 && line.points[0] && line.points[line.points.length - 1]) {
         ctx.beginPath()
         ctx.moveTo(line.points[0].x, line.points[0].y)
         for (let i = 1; i < line.points.length; i++) {
-          ctx.lineTo(line.points[i].x, line.points[i].y)
+          const point = line.points[i]
+          if (point) {
+            ctx.lineTo(point.x, point.y)
+          }
         }
         ctx.stroke()
 
         // Dibujar etiqueta de confianza
-        const midX = (line.points[0].x + line.points[line.points.length - 1].x) / 2
-        const midY = (line.points[0].y + line.points[line.points.length - 1].y) / 2
+        const firstPoint = line.points[0]!
+        const lastPoint = line.points[line.points.length - 1]!
+        const midX = (firstPoint.x + lastPoint.x) / 2
+        const midY = (firstPoint.y + lastPoint.y) / 2
         
         ctx.fillStyle = color
         ctx.font = '12px Arial'

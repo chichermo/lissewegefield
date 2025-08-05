@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   FileDown,
@@ -9,18 +9,12 @@ import {
   FileSpreadsheet,
   Code,
   Award,
-  Calendar,
   MapPin,
-  Target,
-  Clock,
-  Users,
   Trophy,
   CheckCircle,
   Download,
   X,
-  Eye,
-  Settings,
-  Printer
+  Settings
 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 
@@ -211,7 +205,7 @@ export default function AdvancedExportSystem({
     try {
       // Simular proceso de exportación
       for (let i = 0; i < exportSteps.length; i++) {
-        setExportStep(exportSteps[i])
+        setExportStep(exportSteps[i] || '')
         setExportProgress((i + 1) / exportSteps.length * 100)
         await new Promise(resolve => setTimeout(resolve, 1000))
       }
@@ -271,7 +265,7 @@ export default function AdvancedExportSystem({
     }
   }
 
-  const generateFIFACertificate = async (data: ExportData, settings: any) => {
+  const generateFIFACertificate = async (data: ExportData, _settings: any) => {
     // Generar certificado PDF FIFA oficial
     const content = `
       %PDF-1.4
@@ -303,7 +297,7 @@ export default function AdvancedExportSystem({
     return { content, size: content.length }
   }
 
-  const generateTechnicalReport = async (data: ExportData, settings: any) => {
+  const generateTechnicalReport = async (data: ExportData, _settings: any) => {
     // Generar reporte técnico detallado
     const content = JSON.stringify({
       report_type: 'technical_analysis',
@@ -325,7 +319,7 @@ export default function AdvancedExportSystem({
     return { content, size: content.length }
   }
 
-  const generateCSVData = async (data: ExportData, settings: any) => {
+  const generateCSVData = async (data: ExportData, _settings: any) => {
     // Generar datos CSV
     let csv = 'Type,Name,Value,Unit,FIFA_Compliant,Timestamp\n'
     
@@ -363,7 +357,7 @@ export default function AdvancedExportSystem({
     return { content: JSON.stringify(jsonData, null, 2), size: JSON.stringify(jsonData).length }
   }
 
-  const generateFieldMap = async (data: ExportData, settings: any) => {
+  const generateFieldMap = async (data: ExportData, _settings: any) => {
     // Generar mapa visual del campo
     const svgContent = `
       <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
@@ -379,10 +373,10 @@ export default function AdvancedExportSystem({
     return { content: svgContent, size: svgContent.length }
   }
 
-  const generatePhotoGallery = async (data: ExportData, settings: any) => {
+  const generatePhotoGallery = async (data: ExportData, _settings: any) => {
     // Generar galería de fotos
     const manifest = {
-      photos: data.photos.map((photo, index) => ({
+      photos: data.photos.map((_, index) => ({
         filename: `photo_${index + 1}.jpg`,
         timestamp: new Date().toISOString(),
         metadata: {

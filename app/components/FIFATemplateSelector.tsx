@@ -1,18 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Trophy, 
-  Users, 
-  Calendar, 
-  Ruler, 
+  Users,
   CheckCircle, 
   Star,
   Target,
   Zap,
-  X,
-  Download
+  X
 } from 'lucide-react'
 import { useLanguage } from '../contexts/LanguageContext'
 
