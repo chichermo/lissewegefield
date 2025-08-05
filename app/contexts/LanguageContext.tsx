@@ -364,7 +364,8 @@ const translations = {
     'calendar.import': 'Importar Eventos',
     
     // Productos
-    'products.title': 'Productos FIFA',
+    'products.title': 'Gestión de Productos Pro',
+    'products.subtitle': 'Sistema profesional de inventario y gestión de productos FIFA',
     'products.category.equipment': 'Equipamiento',
     'products.category.maintenance': 'Mantenimiento',
     'products.category.marking': 'Marcado',
@@ -410,6 +411,10 @@ const translations = {
     'products.results': 'resultados encontrados',
     'products.no.results': 'No se encontraron productos',
     'products.clear.filters': 'Limpiar Filtros',
+    'products.items': 'Productos',
+    'products.low.stock': 'Bajo Stock',
+    'products.fifa.standards': 'Estándares FIFA',
+    'products.inventory.status': 'Estado del Inventario',
     
     // Marcado
     'marking.title': 'Marcado Móvil',
@@ -672,7 +677,8 @@ const translations = {
     'calendar.import': 'Evenementen Importeren',
     
     // Producten
-    'products.title': 'FIFA Producten',
+    'products.title': 'Productbeheer Pro',
+    'products.subtitle': 'Professioneel inventaris- en productbeheersysteem FIFA',
     'products.category.equipment': 'Uitrusting',
     'products.category.maintenance': 'Onderhoud',
     'products.category.marking': 'Markering',
@@ -717,7 +723,11 @@ const translations = {
     'products.sort.newest': 'Nieuwste',
     'products.results': 'resultaten gevonden',
     'products.no.results': 'Geen producten gevonden',
-    'products.clear.filters': 'Filters Wissen'
+    'products.clear.filters': 'Filters Wissen',
+    'products.items': 'Producten',
+    'products.low.stock': 'Lage Voorraad',
+    'products.fifa.standards': 'FIFA Standaarden',
+    'products.inventory.status': 'Voorraadstatus'
   },
   
   en: {
@@ -932,7 +942,8 @@ const translations = {
     'calendar.import': 'Import Events',
     
     // Products
-    'products.title': 'FIFA Products',
+    'products.title': 'Product Management Pro',
+    'products.subtitle': 'Professional inventory and FIFA product management system',
     'products.category.equipment': 'Equipment',
     'products.category.maintenance': 'Maintenance',
     'products.category.marking': 'Marking',
@@ -977,7 +988,11 @@ const translations = {
     'products.sort.newest': 'Newest',
     'products.results': 'results found',
     'products.no.results': 'No products found',
-    'products.clear.filters': 'Clear Filters'
+    'products.clear.filters': 'Clear Filters',
+    'products.items': 'Products',
+    'products.low.stock': 'Low Stock',
+    'products.fifa.standards': 'FIFA Standards',
+    'products.inventory.status': 'Inventory Status'
   }
 }
 

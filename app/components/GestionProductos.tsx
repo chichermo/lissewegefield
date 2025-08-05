@@ -24,9 +24,11 @@ import {
     Zap
 } from 'lucide-react'
 import { useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import { Producto, Tarea } from '../../types'
 
 export default function GestionProductos() {
+  const { t } = useLanguage()
   const [productos, setProductos] = useState<Producto[]>([
     {
       id: 1,
@@ -287,19 +289,19 @@ export default function GestionProductos() {
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gradient">Gestión de Productos Pro</h2>
-              <p className="text-white/70">Sistema profesional de inventario y gestión de productos FIFA</p>
+              <h2 className="text-2xl font-bold text-gradient">{t('products.title')}</h2>
+              <p className="text-white/70">{t('products.subtitle') || 'Sistema profesional de inventario y gestión de productos FIFA'}</p>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="futbol-indicator success">
               <ShoppingCart className="w-4 h-4" />
-              <span>{productos.length} Productos</span>
+              <span>{productos.length} {t('products.items')}</span>
             </div>
             <div className="futbol-indicator info">
               <Truck className="w-4 h-4" />
-              <span>{productos.filter(p => p.stock < 10).length} Bajo Stock</span>
+              <span>{productos.filter(p => p.stock < 10).length} {t('products.low.stock')}</span>
             </div>
             <div className="futbol-indicator success">
               <CreditCard className="w-4 h-4" />
@@ -313,7 +315,7 @@ export default function GestionProductos() {
           <motion.div className="futbol-card" whileHover={{ scale: 1.02 }}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
               <Shield className="w-5 h-5 text-blue-400" />
-              Estándares FIFA
+              {t('products.fifa.standards')}
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -334,11 +336,11 @@ export default function GestionProductos() {
           <motion.div className="futbol-card" whileHover={{ scale: 1.02 }}>
             <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
               <Zap className="w-5 h-5 text-yellow-400" />
-              Estado del Inventario
+              {t('products.inventory.status')}
             </h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span>Bajo Stock:</span>
+                <span>{t('products.low.stock')}:</span>
                 <span className="text-red-400">{estadisticasAvanzadas.productosBajoStock}</span>
               </div>
               <div className="flex justify-between">
